@@ -33,11 +33,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     var activityIndicatorBack = UIView()
     var loadingLbl = UILabel()
     
+    var businessCards: [SCNNode] = []
+    
+    var businessButtons: [SCNNode] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the view's delegate
         sceneView.delegate = self
+        sceneView.isUserInteractionEnabled = true
         activityIndicatorBack.isHidden = true
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
@@ -147,7 +152,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         self.performSegue(withIdentifier: "showList", sender: nil)
     }
     
-     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
+    @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
+        
         print("TAPPED")
         activityIndicatorBack.isHidden = false
         crosshairView.isHidden = true
@@ -169,31 +175,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         loadingLbl.font = UIFont(name: "Avenir-Medium", size: 16)
         loadingLbl.frame = CGRect(x: activityIndicatorView.frame.maxX, y: 0, width: activityIndicatorBack.frame.size.width - activityIndicatorView.frame.maxX, height: 50)
         activityIndicatorBack.addSubview(loadingLbl)
-        
-        // Ignore other touches
+       
+        // Start Animation
         activityIndicatorView.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        let when = DispatchTime.now() + 1.0
-        DispatchQueue.main.asyncAfter(deadline: when) {
+        //Takes Image
+        let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
+        if pixbuff == nil { return }
+        let ciImage = CIImage(cvPixelBuffer: pixbuff!)
+        var image = convertCItoUIImage(cmage: ciImage)
+        image = image.crop(to: CGSize(width: image.size.width, height: image.size.width))
+        image = image.zoom(to: 4.0) ?? image
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }, completionHandler: { success, error in
+            if success {
+                print("Saved successfully")
+                // Saved successfully!
+            }
+        })
+
+        GoogleAPIManager.shared().identify(image: image, completionHandler: { (result) in
             self.activityIndicatorView.stopAnimating()
             self.activityIndicatorBack.isHidden = true
             self.crosshairView.isHidden = false
             self.tipLbl.isHidden = false
             UIApplication.shared.endIgnoringInteractionEvents()
-        }
+            
+            //Assign Values to Cell
+        })
+        self.activityIndicatorView.stopAnimating()
+        self.activityIndicatorBack.isHidden = true
+        self.crosshairView.isHidden = false
+        self.tipLbl.isHidden = false
+        UIApplication.shared.endIgnoringInteractionEvents()
         
     }
-    // MARK: - ARSCNViewDelegate
-    
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user

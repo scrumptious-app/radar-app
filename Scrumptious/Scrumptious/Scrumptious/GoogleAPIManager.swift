@@ -32,7 +32,6 @@ class GoogleAPIManager {
         // Base64 encode the image and create the request
         let binaryImagePacket = base64EncodeImage(image)
         
-        //FIX ME
         createRequest(with: binaryImagePacket, completionHandler: completionHandler)
     }
     
