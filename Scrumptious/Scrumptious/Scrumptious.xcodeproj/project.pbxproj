@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EE5A912C881EFC98F7BCBEB /* Pods_ScrumptiousTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CB959A0CF4B788E3C1B908 /* Pods_ScrumptiousTests.framework */; };
+		A6387E7D0296D9117A9C7AF0 /* Pods_Scrumptious.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63A75047B92E617AD67C487 /* Pods_Scrumptious.framework */; };
 		ACA14D661F761E6C00E96095 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA14D651F761E6C00E96095 /* AppDelegate.swift */; };
 		ACA14D681F761E6C00E96095 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA14D671F761E6C00E96095 /* art.scnassets */; };
 		ACA14D6A1F761E6C00E96095 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA14D691F761E6C00E96095 /* ViewController.swift */; };
@@ -15,6 +17,7 @@
 		ACA14D721F761E6C00E96095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACA14D701F761E6C00E96095 /* LaunchScreen.storyboard */; };
 		ACA14D7D1F761E6D00E96095 /* ScrumptiousTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA14D7C1F761E6D00E96095 /* ScrumptiousTests.swift */; };
 		ACA14D881F761E6D00E96095 /* ScrumptiousUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA14D871F761E6D00E96095 /* ScrumptiousUITests.swift */; };
+		FD421DB767D3E62469A1942F /* Pods_ScrumptiousUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB7095FE5F2698EE61BCA0A /* Pods_ScrumptiousUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19CB959A0CF4B788E3C1B908 /* Pods_ScrumptiousTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrumptiousTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CB7095FE5F2698EE61BCA0A /* Pods_ScrumptiousUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrumptiousUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74338091FAC0E1A373BEDB54 /* Pods-ScrumptiousTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrumptiousTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrumptiousTests/Pods-ScrumptiousTests.release.xcconfig"; sourceTree = "<group>"; };
+		7DFE65D41DC97B8291D66FC1 /* Pods-Scrumptious.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scrumptious.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scrumptious/Pods-Scrumptious.debug.xcconfig"; sourceTree = "<group>"; };
+		A3BA7241D80253419C6150CC /* Pods-ScrumptiousUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrumptiousUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrumptiousUITests/Pods-ScrumptiousUITests.release.xcconfig"; sourceTree = "<group>"; };
 		ACA14D621F761E6C00E96095 /* Scrumptious.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scrumptious.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA14D651F761E6C00E96095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACA14D671F761E6C00E96095 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -49,6 +57,10 @@
 		ACA14D831F761E6D00E96095 /* ScrumptiousUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrumptiousUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA14D871F761E6D00E96095 /* ScrumptiousUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrumptiousUITests.swift; sourceTree = "<group>"; };
 		ACA14D891F761E6D00E96095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C08DB329E38F10BC781C5DBA /* Pods-Scrumptious.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scrumptious.release.xcconfig"; path = "Pods/Target Support Files/Pods-Scrumptious/Pods-Scrumptious.release.xcconfig"; sourceTree = "<group>"; };
+		CCBB91C08B201DCD8806491C /* Pods-ScrumptiousUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrumptiousUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrumptiousUITests/Pods-ScrumptiousUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CE75B7A247887883568559BB /* Pods-ScrumptiousTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrumptiousTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrumptiousTests/Pods-ScrumptiousTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F63A75047B92E617AD67C487 /* Pods_Scrumptious.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scrumptious.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6387E7D0296D9117A9C7AF0 /* Pods_Scrumptious.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EE5A912C881EFC98F7BCBEB /* Pods_ScrumptiousTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +84,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD421DB767D3E62469A1942F /* Pods_ScrumptiousUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37A231E3C13EFCC74C0FB24D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F63A75047B92E617AD67C487 /* Pods_Scrumptious.framework */,
+				19CB959A0CF4B788E3C1B908 /* Pods_ScrumptiousTests.framework */,
+				1CB7095FE5F2698EE61BCA0A /* Pods_ScrumptiousUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A18BBEB5BEE4DD602074677D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7DFE65D41DC97B8291D66FC1 /* Pods-Scrumptious.debug.xcconfig */,
+				C08DB329E38F10BC781C5DBA /* Pods-Scrumptious.release.xcconfig */,
+				CE75B7A247887883568559BB /* Pods-ScrumptiousTests.debug.xcconfig */,
+				74338091FAC0E1A373BEDB54 /* Pods-ScrumptiousTests.release.xcconfig */,
+				CCBB91C08B201DCD8806491C /* Pods-ScrumptiousUITests.debug.xcconfig */,
+				A3BA7241D80253419C6150CC /* Pods-ScrumptiousUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		ACA14D591F761E6C00E96095 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +121,8 @@
 				ACA14D7B1F761E6D00E96095 /* ScrumptiousTests */,
 				ACA14D861F761E6D00E96095 /* ScrumptiousUITests */,
 				ACA14D631F761E6C00E96095 /* Products */,
+				A18BBEB5BEE4DD602074677D /* Pods */,
+				37A231E3C13EFCC74C0FB24D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,9 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ACA14D8C1F761E6D00E96095 /* Build configuration list for PBXNativeTarget "Scrumptious" */;
 			buildPhases = (
+				90632530C09B2709AAD9AF49 /* [CP] Check Pods Manifest.lock */,
 				ACA14D5E1F761E6C00E96095 /* Sources */,
 				ACA14D5F1F761E6C00E96095 /* Frameworks */,
 				ACA14D601F761E6C00E96095 /* Resources */,
+				CE2BF1CD4DB58B30B6BED8EA /* [CP] Embed Pods Frameworks */,
+				8439AA7646E3F423B65FDF40 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +195,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ACA14D8F1F761E6D00E96095 /* Build configuration list for PBXNativeTarget "ScrumptiousTests" */;
 			buildPhases = (
+				C848BFC430595FB3D061FF6F /* [CP] Check Pods Manifest.lock */,
 				ACA14D741F761E6D00E96095 /* Sources */,
 				ACA14D751F761E6D00E96095 /* Frameworks */,
 				ACA14D761F761E6D00E96095 /* Resources */,
+				A75786CC82BF5A89E1C8163A /* [CP] Embed Pods Frameworks */,
+				90F5515980AF82EF5EF3D527 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +216,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ACA14D921F761E6D00E96095 /* Build configuration list for PBXNativeTarget "ScrumptiousUITests" */;
 			buildPhases = (
+				E9F00107C87D1BEF26471543 /* [CP] Check Pods Manifest.lock */,
 				ACA14D7F1F761E6D00E96095 /* Sources */,
 				ACA14D801F761E6D00E96095 /* Frameworks */,
 				ACA14D811F761E6D00E96095 /* Resources */,
+				0F5933793C1E82DAF42B5EC7 /* [CP] Embed Pods Frameworks */,
+				B959600C02E3089C0E3E897E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -257,6 +306,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F5933793C1E82DAF42B5EC7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScrumptiousUITests/Pods-ScrumptiousUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8439AA7646E3F423B65FDF40 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Scrumptious/Pods-Scrumptious-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90632530C09B2709AAD9AF49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		90F5515980AF82EF5EF3D527 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScrumptiousTests/Pods-ScrumptiousTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A75786CC82BF5A89E1C8163A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScrumptiousTests/Pods-ScrumptiousTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B959600C02E3089C0E3E897E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScrumptiousUITests/Pods-ScrumptiousUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C848BFC430595FB3D061FF6F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CE2BF1CD4DB58B30B6BED8EA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Scrumptious/Pods-Scrumptious-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9F00107C87D1BEF26471543 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ACA14D5E1F761E6C00E96095 /* Sources */ = {
@@ -428,6 +615,7 @@
 		};
 		ACA14D8D1F761E6D00E96095 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DFE65D41DC97B8291D66FC1 /* Pods-Scrumptious.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -443,6 +631,7 @@
 		};
 		ACA14D8E1F761E6D00E96095 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C08DB329E38F10BC781C5DBA /* Pods-Scrumptious.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -458,6 +647,7 @@
 		};
 		ACA14D901F761E6D00E96095 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE75B7A247887883568559BB /* Pods-ScrumptiousTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -475,6 +665,7 @@
 		};
 		ACA14D911F761E6D00E96095 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74338091FAC0E1A373BEDB54 /* Pods-ScrumptiousTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -492,6 +683,7 @@
 		};
 		ACA14D931F761E6D00E96095 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCBB91C08B201DCD8806491C /* Pods-ScrumptiousUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -508,6 +700,7 @@
 		};
 		ACA14D941F761E6D00E96095 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3BA7241D80253419C6150CC /* Pods-ScrumptiousUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

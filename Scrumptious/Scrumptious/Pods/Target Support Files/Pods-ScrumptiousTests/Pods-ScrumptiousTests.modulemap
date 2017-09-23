@@ -1,0 +1,6 @@
+framework module Pods_ScrumptiousTests {
+  umbrella header "Pods-ScrumptiousTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
