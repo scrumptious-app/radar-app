@@ -163,14 +163,8 @@ class GoogleAPIManager {
                                 }
                             }
                         }
-                        
-                        // For each item returned by Google, get its usage information
-                        //                        apiManager.getUsageForDrug("\(response)", completionHandler: { (response) in
-                        //                            if response != nil{
-                        //
-                        //                            }
-                        //                        })
-                        apiManager.getUsageForDrug("\(response)", completionHandler: handler)
+            
+                        apiManager.getBusinessInfo("\(response)", completionHandler: handler)
                     }
                     
                 })

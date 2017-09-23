@@ -26,12 +26,12 @@ class HasuraAPIManager {
         return sharedInstance
     }
     
-    func getUsageForDrug(_ drug: String, completionHandler: @escaping (((instructions: String,maximumDose: Int)?) ->())) {
+    func getBusinessInfo(_ Business: String, completionHandler: @escaping (((instructions: String,maximumDose: Int)?) ->())) {
         
         // Create our request URL
         
-        var request = URLRequest(url: hasuraURL.appendingPathComponent("medication/").appendingPathComponent(drug.lowercased()))
-        request.httpMethod = "GET"
+        var request = URLRequest(url: hasuraURL.appendingPathComponent("medication/").appendingPathComponent(Business.lowercased()))
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // Run the request on a background thread
@@ -78,19 +78,19 @@ class HasuraAPIManager {
     }
     
     
-    func getLogoForDrug( drug: String, completionHandler: @escaping (UIImage)-> ()){
-//        if let cachedImage = DataManager.shared().logoCache[drug.lowercased()]{
+    func getLogoForBusiness( Business: String, completionHandler: @escaping (UIImage)-> ()){
+//        if let cachedImage = DataManager.shared().logoCache[Business.lowercased()]{
 //            completionHandler(cachedImage)
 //            return
 //        }
         
-        Alamofire.request(hasuraURL.appendingPathComponent("logo/\(drug)")).responseJSON { (response) in
+        Alamofire.request(hasuraURL.appendingPathComponent("logo/\(Business)")).responseJSON { (response) in
             if let json = response.data {
                 let data = JSON(data: json)
                 print(data)
                 if let urlStr = data["url"].string{
                     let url = URL(string: urlStr)!
-                    self.downloadImage(url: url, searchTerm: drug, completionHandler: completionHandler)
+                    self.downloadImage(url: url, searchTerm: Business, completionHandler: completionHandler)
                 }
             }
             

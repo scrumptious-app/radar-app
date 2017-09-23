@@ -55,8 +55,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         sceneView.session.run(configuration)
         
         if locationManager != nil{
-            print("latitude", locationManager.location?.coordinate.latitude)
-            print("longitude", locationManager.location?.coordinate.longitude)
+            print("latitude", locationManager.location!.coordinate.latitude)
+            print("longitude", locationManager.location!.coordinate.longitude)
         }
     }
     
