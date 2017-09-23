@@ -124,8 +124,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         
         nearYouView.roundCorners(corners: [.topLeft , .topRight], radius: 16)
         if locationManager != nil{
-            print("latitude", locationManager.location?.coordinate.latitude)
-            print("longitude", locationManager.location?.coordinate.longitude)
+            print("latitude", locationManager.location!.coordinate.latitude)
+            print("longitude", locationManager.location!.coordinate.longitude)
         }
     }
     
