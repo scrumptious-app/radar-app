@@ -13,6 +13,7 @@
 		7EE5A912C881EFC98F7BCBEB /* Pods_ScrumptiousTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CB959A0CF4B788E3C1B908 /* Pods_ScrumptiousTests.framework */; };
 		A6387E7D0296D9117A9C7AF0 /* Pods_Scrumptious.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F63A75047B92E617AD67C487 /* Pods_Scrumptious.framework */; };
 		AC5FDCBD1F76978D00441FC0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FDCBC1F76978D00441FC0 /* DataManager.swift */; };
+		AC5FDCBF1F76C49B00441FC0 /* BusinessProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5FDCBE1F76C49B00441FC0 /* BusinessProfile.swift */; };
 		ACA14D661F761E6C00E96095 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA14D651F761E6C00E96095 /* AppDelegate.swift */; };
 		ACA14D681F761E6C00E96095 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA14D671F761E6C00E96095 /* art.scnassets */; };
 		ACA14D6A1F761E6C00E96095 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA14D691F761E6C00E96095 /* ViewController.swift */; };
@@ -53,6 +54,7 @@
 		7DFE65D41DC97B8291D66FC1 /* Pods-Scrumptious.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scrumptious.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Scrumptious/Pods-Scrumptious.debug.xcconfig"; sourceTree = "<group>"; };
 		A3BA7241D80253419C6150CC /* Pods-ScrumptiousUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrumptiousUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrumptiousUITests/Pods-ScrumptiousUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AC5FDCBC1F76978D00441FC0 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		AC5FDCBE1F76C49B00441FC0 /* BusinessProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfile.swift; sourceTree = "<group>"; };
 		ACA14D621F761E6C00E96095 /* Scrumptious.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scrumptious.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA14D651F761E6C00E96095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACA14D671F761E6C00E96095 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				ACA14D651F761E6C00E96095 /* AppDelegate.swift */,
 				ACA14D671F761E6C00E96095 /* art.scnassets */,
 				ACA14D691F761E6C00E96095 /* ViewController.swift */,
+				AC5FDCBE1F76C49B00441FC0 /* BusinessProfile.swift */,
 				ACB69A1A1F76959800F003D8 /* GoogleAPIManager.swift */,
 				AC5FDCBC1F76978D00441FC0 /* DataManager.swift */,
 				ACB69A1C1F7695B500F003D8 /* HasuraAPIManager.swift */,

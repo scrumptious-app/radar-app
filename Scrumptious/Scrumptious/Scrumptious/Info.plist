@@ -2,6 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location to improve accuracy of api</string>
+	<key>NSLocationAlwaysUsageDescription
+
+NSLocationAlwaysUsageDescription
+
+NSLocationAlwaysUsageDescription
+
+</key>
+	<string>Location to improve accuracy of api</string>
+	<key>NSLocationAlwaysUsageDescription
+
+NSLocationAlwaysUsageDescription
+
+NSLocationAlwaysUsageDescription
+
+NSLocationAlwaysUsageDescription
+
+</key>
+	<string>Location to improve accuracy of api</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location to improve accuracy of api</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Location to improve accuracy of api</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -20,6 +44,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Save training data</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This application will use the camera for Augmented Reality.</string>
 	<key>UILaunchStoryboardName</key>
