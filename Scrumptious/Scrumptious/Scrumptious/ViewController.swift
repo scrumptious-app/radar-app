@@ -20,6 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     let topTableView = UIView()
     var tapGesture = UITapGestureRecognizer()
     var panGesture = UIPanGestureRecognizer()
+    var panDownGesture = UISwipeGestureRecognizer()
     var locationManager: CLLocationManager!
     
     let showListBtn = UIButton()
@@ -34,6 +35,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     var loadingLbl = UILabel()
     
     var shopCards: [SCNNode] = []
+    var imageBacks: [UIView] = []
     var fetchingResults = true
     
     // Card Info
@@ -57,6 +59,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         let gestureUp = UISwipeGestureRecognizer(target: self, action: #selector(gestureSegue))
         gestureUp.direction = .up
         nearYouView.addGestureRecognizer(gestureUp)
+        
+        panDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissVR))
+        panDownGesture.direction = .down
+        sceneView.addGestureRecognizer(panDownGesture)
         
         nearYouView.frame = CGRect(x: 0.0, y: sceneView.frame.size.height - 80, width: sceneView.frame.size.width, height: 80.0)
         nearYouView.backgroundColor = UIColor(red: 246/255, green: 218/255, blue: 77/255, alpha: 1.0)
@@ -121,7 +127,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     
     override var prefersStatusBarHidden: Bool {
         return true
-    }  
+    }
+    
+    @objc func dismissVR() {
+        
+        //sceneView.session.pause()
+        
+        for node in shopCards {
+            node.removeFromParentNode()
+        }
+        
+        for back in imageBacks {
+            back.removeFromSuperview()
+        }
+        
+        shopCards.removeAll()
+        imageBacks.removeAll()
+
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -230,6 +253,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             let imageView = UIView(frame: CGRect(x: 0, y: 0, width: 800, height: 600))
             imageView.backgroundColor = .clear
             imageView.alpha = 1.0
+            self.imageBacks.append(imageView)
             
             titleLabel.frame = CGRect(x: 30, y: 30, width: imageView.frame.width-128, height: 84)
             titleLabel.textAlignment = .left
@@ -240,9 +264,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             imageView.addSubview(titleLabel)
             
             let typeImg = UIImageView()
-            typeImg.frame = CGRect(x: 650, y: 5, width: 120, height: 120)
+            typeImg.frame = CGRect(x: 640, y: 2, width: 140, height: 140)
             typeImg.contentMode = .scaleAspectFill
-            typeImg.layer.cornerRadius = 60
+            typeImg.layer.cornerRadius = 70
             typeImg.layer.masksToBounds = true
             typeImg.image = UIImage(named: "foodicon")
             imageView.addSubview(typeImg)
