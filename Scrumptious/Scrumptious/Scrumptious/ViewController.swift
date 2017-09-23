@@ -14,13 +14,14 @@ import Vision
 import Photos
 import CoreLocation
 
-class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     let topTableView = UIView()
     var mainListVC: MainListVC?
     var tapGesture = UITapGestureRecognizer()
     var panGesture = UIPanGestureRecognizer()
+    var locationManager: CLLocationManager!
     
     let showListBtn = UIButton()
     let nearYouView = UIView()
@@ -29,15 +30,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     let tipLbl = UILabel()
     
     let crosshairView = UIImageView()
+    var activityIndicatorView = UIActivityIndicatorView()
+    var activityIndicatorBack = UIView()
+    var loadingLbl = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the view's delegate
         sceneView.delegate = self
-//        tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
-//        tapGesture.delegate = self
-//        view.addGestureRecognizer(tapGesture)
+        activityIndicatorBack.isHidden = true
+        
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
+        tapGesture.delegate = self
+        sceneView.addGestureRecognizer(tapGesture)
+        
         let gestureUp = UISwipeGestureRecognizer(target: self, action: #selector(gestureSegue))
         gestureUp.direction = .up
         nearYouView.addGestureRecognizer(gestureUp)
@@ -116,6 +123,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         sceneView.session.run(configuration)
         
         nearYouView.roundCorners(corners: [.topLeft , .topRight], radius: 16)
+        if locationManager != nil{
+            print("latitude", locationManager.location?.coordinate.latitude)
+            print("longitude", locationManager.location?.coordinate.longitude)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -133,11 +144,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         self.performSegue(withIdentifier: "showList", sender: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
+     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
+        print("TAPPED")
+        activityIndicatorBack.isHidden = false
+        crosshairView.isHidden = true
+        tipLbl.isHidden = true
+        // Loader
+        activityIndicatorBack.frame = CGRect(x: (sceneView.frame.size.width / 2) - 75, y: sceneView.frame.size.height / 2 - 60, width: 150, height: 50)
+        activityIndicatorBack.backgroundColor = UIColor(red: 246/255, green: 218/255, blue: 77/255, alpha: 1.0)
+        activityIndicatorBack.layer.cornerRadius = 6
+        sceneView.addSubview(activityIndicatorBack)
+        
+        activityIndicatorView.frame = CGRect(x: 5, y: (activityIndicatorBack.frame.size.height / 2) - 25, width: 50, height: 50)
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        activityIndicatorBack.addSubview(activityIndicatorView)
+        
+        loadingLbl.text = "LOADING"
+        loadingLbl.textAlignment = .left
+        loadingLbl.textColor = UIColor.white
+        loadingLbl.font = UIFont(name: "Avenir Medium", size: 16)
+        loadingLbl.frame = CGRect(x: activityIndicatorView.frame.maxX, y: 0, width: activityIndicatorBack.frame.size.width - activityIndicatorView.frame.maxX, height: 50)
+        activityIndicatorBack.addSubview(loadingLbl)
+        
+        // Ignore other touches
+        activityIndicatorView.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        let when = DispatchTime.now() + 1.0
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorBack.isHidden = true
+            self.crosshairView.isHidden = false
+            self.tipLbl.isHidden = false
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+        
     }
-
     // MARK: - ARSCNViewDelegate
     
 /*

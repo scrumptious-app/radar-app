@@ -7,7 +7,6 @@ target 'Scrumptious' do
 
   pod 'SwiftyJSON'
   pod 'Alamofire'
-  pod 'SDWebImage'
 
   # Pods for Scrumptious
 
