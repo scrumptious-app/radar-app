@@ -12,10 +12,12 @@ import ARKit
 import SceneKit.ModelIO
 import Vision
 import Photos
+import CoreLocation
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         // sceneView.scene = scene
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +53,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Run the view's session
         sceneView.session.run(configuration)
+        
+        if locationManager != nil{
+            print("latitude", locationManager.location?.coordinate.latitude)
+            print("longitude", locationManager.location?.coordinate.longitude)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
