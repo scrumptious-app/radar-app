@@ -26,6 +26,10 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        //topView.roundCorners(corners: [.topLeft , .topRight], radius: 16)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         topView.roundCorners(corners: [.topLeft , .topRight], radius: 16)
     }
