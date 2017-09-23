@@ -29,6 +29,10 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidAppear(_ animated: Bool) {
         topView.roundCorners(corners: [.topLeft , .topRight], radius: 16)
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

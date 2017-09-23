@@ -18,7 +18,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
 
     @IBOutlet var sceneView: ARSCNView!
     let topTableView = UIView()
-    var mainListVC: MainListVC?
     var tapGesture = UITapGestureRecognizer()
     var panGesture = UIPanGestureRecognizer()
     var locationManager: CLLocationManager!
@@ -73,7 +72,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         crosshairView.image = UIImage(named: "focus2")
         sceneView.addSubview(crosshairView)
         
-        tipLbl.font = UIFont(name: "Avenir Medium", size: 22)
+        tipLbl.font = UIFont(name: "Avenir", size: 22)
         tipLbl.text = "Point towards a storefront"
         tipLbl.textAlignment = .center
         tipLbl.textColor = UIColor.white
@@ -109,6 +108,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             locationManager.startUpdatingLocation()
         }
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }  
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -163,7 +166,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         loadingLbl.text = "LOADING"
         loadingLbl.textAlignment = .left
         loadingLbl.textColor = UIColor.white
-        loadingLbl.font = UIFont(name: "Avenir Medium", size: 16)
+        loadingLbl.font = UIFont(name: "Avenir-Medium", size: 16)
         loadingLbl.frame = CGRect(x: activityIndicatorView.frame.maxX, y: 0, width: activityIndicatorBack.frame.size.width - activityIndicatorView.frame.maxX, height: 50)
         activityIndicatorBack.addSubview(loadingLbl)
         

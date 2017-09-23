@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		203EF04A1F76ADAA00A624BD /* MainListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EF0491F76ADAA00A624BD /* MainListVC.swift */; };
 		203EF04C1F76ADEB00A624BD /* AllFoodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EF04B1F76ADEB00A624BD /* AllFoodVC.swift */; };
 		203EF04E1F76B45F00A624BD /* StoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203EF04D1F76B45F00A624BD /* StoreCell.swift */; };
 		7EE5A912C881EFC98F7BCBEB /* Pods_ScrumptiousTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CB959A0CF4B788E3C1B908 /* Pods_ScrumptiousTests.framework */; };
@@ -47,7 +46,6 @@
 /* Begin PBXFileReference section */
 		19CB959A0CF4B788E3C1B908 /* Pods_ScrumptiousTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrumptiousTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CB7095FE5F2698EE61BCA0A /* Pods_ScrumptiousUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrumptiousUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		203EF0491F76ADAA00A624BD /* MainListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListVC.swift; sourceTree = "<group>"; };
 		203EF04B1F76ADEB00A624BD /* AllFoodVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFoodVC.swift; sourceTree = "<group>"; };
 		203EF04D1F76B45F00A624BD /* StoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreCell.swift; sourceTree = "<group>"; };
 		74338091FAC0E1A373BEDB54 /* Pods-ScrumptiousTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrumptiousTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrumptiousTests/Pods-ScrumptiousTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				ACA14D6E1F761E6C00E96095 /* Assets.xcassets */,
 				ACA14D701F761E6C00E96095 /* LaunchScreen.storyboard */,
 				ACA14D731F761E6C00E96095 /* Info.plist */,
-				203EF0491F76ADAA00A624BD /* MainListVC.swift */,
 				203EF04B1F76ADEB00A624BD /* AllFoodVC.swift */,
 				203EF04D1F76B45F00A624BD /* StoreCell.swift */,
 			);
@@ -475,7 +472,6 @@
 				AC5FDCBD1F76978D00441FC0 /* DataManager.swift in Sources */,
 				203EF04C1F76ADEB00A624BD /* AllFoodVC.swift in Sources */,
 				ACB69A1B1F76959800F003D8 /* GoogleAPIManager.swift in Sources */,
-				203EF04A1F76ADAA00A624BD /* MainListVC.swift in Sources */,
 				AC5FDCBF1F76C49B00441FC0 /* BusinessProfile.swift in Sources */,
 				ACB69A1D1F7695B500F003D8 /* HasuraAPIManager.swift in Sources */,
 				ACA14D661F761E6C00E96095 /* AppDelegate.swift in Sources */,
