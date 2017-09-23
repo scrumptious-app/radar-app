@@ -28,7 +28,7 @@ class GoogleAPIManager {
         return sharedInstance
     }
     
-    func identifyDrug(image: UIImage, completionHandler:@escaping (((itemName: String, instructions: String, maximum: Int)?) -> ())) {
+    func identify(image: UIImage, completionHandler:@escaping (((itemName: String, instructions: String, maximum: Int)?) -> ())) {
         // Base64 encode the image and create the request
         let binaryImagePacket = base64EncodeImage(image)
         

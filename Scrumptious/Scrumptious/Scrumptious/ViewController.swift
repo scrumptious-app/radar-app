@@ -9,6 +9,9 @@
 import UIKit
 import SceneKit
 import ARKit
+import SceneKit.ModelIO
+import Vision
+import Photos
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
