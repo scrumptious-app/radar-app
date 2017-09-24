@@ -24,6 +24,9 @@ class StoreCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        storeImg.layer.masksToBounds = true
+        storeImg.layer.cornerRadius = 6
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
