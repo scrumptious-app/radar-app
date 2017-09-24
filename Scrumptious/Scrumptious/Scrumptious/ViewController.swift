@@ -36,7 +36,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     
     var shopCards: [SCNNode] = []
     var imageBacks: [UIView] = []
-    var fetchingResults = true
+    var fetchingResults = false
     
     // Card Info
     let titleLabel = UILabel()
@@ -44,6 +44,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     let limitLabel = UILabel()
     let refillLabel = UILabel()
     var waitTime = 5
+    
+    var nodeArray = [SCNNode]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,14 +136,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         
         //sceneView.session.pause()
         
-        for node in shopCards {
-            node.removeFromParentNode()
-        }
-        
-        for back in imageBacks {
-            back.removeFromSuperview()
-        }
-        
+        self.deleteNodes()
         shopCards.removeAll()
         imageBacks.removeAll()
 
@@ -249,7 +244,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             fetchingResults = true
 
             let screenCentre: CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
-        
             let arHitTestResults: [ARHitTestResult] = sceneView.hitTest(screenCentre, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
             guard let closestResult = arHitTestResults.first else {
                 stopLoader()
@@ -419,11 +413,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             textNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
             backNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
             infoNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
+            
+            //Save nodes in array
+            self.nodeArray.append(infoNode)
+            self.nodeArray.append(textNode)
+            self.nodeArray.append(backNode)
+            
             self.shopCards.append(infoNode)
         
         }
         
         fetchingResults = false
         stopLoader()
+    }
+    
+    func deleteNodes(){
+        for node in nodeArray{
+            node.removeFromParentNode()
+        }
     }
 }
