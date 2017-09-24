@@ -192,35 +192,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         self.crosshairView.isHidden = true
         self.tipLbl.isHidden = true
         UIApplication.shared.beginIgnoringInteractionEvents()
-        
-        //Takes Image
-        let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
-        if pixbuff == nil { return }
-        let ciImage = CIImage(cvPixelBuffer: pixbuff!)
-        var image = convertCItoUIImage(cmage: ciImage)
-        image = image.crop(to: CGSize(width: image.size.width, height: image.size.width))
-        image = image.zoom(to: 2.0) ?? image
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAsset(from: image)
-        }, completionHandler: { success, error in
-            if success {
-                print("Saved successfully")
-                // Saved successfully!
-            }
-        })
-
-        GoogleAPIManager.shared().identify(image: image, lat: locationManager.location!.coordinate.latitude, lon: locationManager.location!.coordinate.longitude, completionHandler: { (result) in
-            
-            
-            //Assign Values to Cell
-        })
-        self.activityIndicatorView.stopAnimating()
-        self.activityIndicatorBack.isHidden = true
-        self.crosshairView.isHidden = false
-        self.tipLbl.isHidden = false
-        UIApplication.shared.endIgnoringInteractionEvents()
-        
         print("Should start loading")
+        
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -249,7 +222,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
         
-        let imageView = UIView()
+        var imageView = UIView()
         
         if fetchingResults == false {
             fetchingResults = true
@@ -257,11 +230,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             let screenCentre: CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
             let arHitTestResults: [ARHitTestResult] = sceneView.hitTest(screenCentre, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
             guard let closestResult = arHitTestResults.first else {
-                stopLoader()
+
                 return
             }
-            
-            startLoader()
             
             //Takes Image
             let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
@@ -406,28 +377,50 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             
             GoogleAPIManager.shared().identify(image: image,lat:locationManager.location!.coordinate.latitude, lon: locationManager.location!.coordinate.longitude, completionHandler: { (result) in
                 if result == nil{
-                    self.stopLoader()
+
                     return
                 }
                 
-                //Setting Values for Business Card
-                if let cat = result?.category{
+                self.crosshairView.isHidden = true
+                
+                let when = DispatchTime.now() + 8 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    // Your code with delay
+                    //Setting Values for Business Card
+                    if let cat = result?.category {
+                        
+                    }
+                    if let rating = result?.rating {
+                        starsImg.image = UIImage(named: "\(Int(rating))stars")
+                        print("rating: ", rating)
+                    } else {
+                        print("NO RATING")
+                    }
+                    if let name = result?.name {
+                        self.titleLabel.text = name.capitalized
+                        print("name: ", name)
+                    } else {
+                        print("NO NAME")
+                    }
+                    if let price = result?.price {
+                        priceTxt.text = price
+                    }
+                    if let image = result?.image {
+                        
+                    } else {
+                        print("NO IMG")
+                    }
                     
+                    //let parent = self.sceneView.superview
+                    //imageView.removeFromSuperview()
+                    imageView.layoutIfNeeded()
+                    //parent?.addSubview(imageView)
+                    //self.stopLoader()
+                    //imageView.reloadInputViews()
+                    self.crosshairView.isHidden = false
                 }
-                if let rating = result?.rating{
-                    starsImg.image = UIImage(named: "\(Int(rating))stars")
-                }
-                if let name = result?.name{
-                    self.titleLabel.text = name.capitalized
-                }
-                if let price = result?.price{
-                    priceTxt.text = price
-                }
-                if let image = result?.image{
-                    
-                }
+                
                 //(category: String, rating: Double, name: String, price: String, image: URL)
-                self.stopLoader()
             })
             
             infoGeometry.firstMaterial?.diffuse.contents = texture
@@ -466,7 +459,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         }
         
         fetchingResults = false
-        stopLoader()
+        print("TITLE: ", titleLabel.text)
     }
     
     func deleteNodes(){
