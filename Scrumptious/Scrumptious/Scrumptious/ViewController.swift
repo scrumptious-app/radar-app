@@ -199,7 +199,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         let ciImage = CIImage(cvPixelBuffer: pixbuff!)
         var image = convertCItoUIImage(cmage: ciImage)
         image = image.crop(to: CGSize(width: image.size.width, height: image.size.width))
-        image = image.zoom(to: 4.0) ?? image
+        image = image.zoom(to: 2.0) ?? image
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAsset(from: image)
         }, completionHandler: { success, error in

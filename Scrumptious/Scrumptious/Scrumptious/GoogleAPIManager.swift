@@ -118,6 +118,7 @@ class GoogleAPIManager {
                             if let description = item["description"].string {
                                 responses.append(description)
                             }
+                            print("logo description", item)
                         }
                     }
                     
@@ -126,6 +127,7 @@ class GoogleAPIManager {
                             if let description = item["description"].string {
                                 responses.append(description)
                             }
+                            print("web description", item)
                         }
                     }
                     let apiManager = HasuraAPIManager.shared()
