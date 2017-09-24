@@ -61,7 +61,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         
         let gestureUp = UISwipeGestureRecognizer(target: self, action: #selector(gestureSegue))
         gestureUp.direction = .up
-        nearYouView.addGestureRecognizer(gestureUp)
+        sceneView.addGestureRecognizer(gestureUp)
         
         panDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissVR))
         panDownGesture.direction = .down
