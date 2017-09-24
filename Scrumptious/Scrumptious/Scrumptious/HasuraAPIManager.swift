@@ -10,9 +10,11 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
+
+
 class HasuraAPIManager {
     var hasuraURL: URL {
-        return URL(string: "https://app.admirable43.hasura-app.io/")!
+        return URL(string: "https://app.bracer90.hasura-app.io")!
     }
     let session = URLSession.shared
     
@@ -26,24 +28,33 @@ class HasuraAPIManager {
         return sharedInstance
     }
     
-    func getBusinessInfo(_ Business: String, completionHandler: @escaping (((instructions: String,maximumDose: Int)?) ->())) {
+    func getBusinessInfo(_ business: String, lat: Double, lon: Double, completionHandler: @escaping (((category: String, rating: Double, name: String, price: String, image: URL)?) ->())) {
         
         // Create our request URL
         
-        var request = URLRequest(url: hasuraURL.appendingPathComponent("medication/").appendingPathComponent(Business.lowercased()))
-        request.httpMethod = "POST"
+        var request = URLRequest(url: URL(string: "https://app.bracer90.hasura-app.io/search?name=\(business)&latitude=\(lat)&longitude=\(lon)")!)
+        request.httpMethod = "GET"
+        print("request before", request)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        print("request after", request )
+        print("WE ARE IN FUNCTION getBusinessInfo")
         
         // Run the request on a background thread
         DispatchQueue.global().async {
             let task: URLSessionDataTask = self.session.dataTask(with: request) { (data, response, error) in
+                
+                print("RESPONSE FROM GETBUSINESS",response )
+                print("DATA FROM GETBUSINESS", data )
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "")
                     completionHandler(nil)
                     return
                 }
                 
+                print("WE ARE IN FUNCTION DispatchQueue.global().async ")
+                
                 DispatchQueue.main.async(execute: {
+                     print("WE ARE IN FUNCTION DispatchQueue.global().execute ")
                     // Use SwiftyJSON to parse results
                     let json = JSON(data: data)
                     let errorObj: JSON = json["error"]
@@ -52,20 +63,41 @@ class HasuraAPIManager {
                         completionHandler(nil)
                         return
                     }
-                    var instructions: String = "No instructions could be found"
+                    
+                    print("JASON VALUES", json.array)
                     var found = false
-                    if let info = json["instructions"].string {
+                    
+                    var category: String?
+                    var rating: Double?
+                    var name: String?
+                    var price: String?
+                    var image: URL?
+                    
+                    //Setting possible values for BusinessProfile initialization
+                    if (json["name"].exists()){
+                        name = json["name"].string
                         found = true
-                        instructions = info
                     }
-                    var maximum = 1
-                    if let maxim = json["maximum"].int{
+                    if json["rating"].exists(){
+                        rating = json["rating"].double
                         found = true
-                        maximum = maxim
                     }
+                    if json["category"].exists(){
+                        category = json["category"].string
+                        found = true
+                    }
+                    if json["price"].exists(){
+                        price = json["price"].string
+                        found = true
+                    }
+                    if json["name"].exists(){
+                        image = json["image"].url
+                        found = true
+                    }
+                
                     if found{
                         print("6----------------")
-                        completionHandler((instructions,maximum))
+                        completionHandler((category,rating,name,price,image) as? (category: String, rating: Double, name: String, price: String, image: URL))
                         return
                     }else{
                         completionHandler(nil)

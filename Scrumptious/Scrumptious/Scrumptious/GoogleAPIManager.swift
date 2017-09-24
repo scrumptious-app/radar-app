@@ -28,11 +28,11 @@ class GoogleAPIManager {
         return sharedInstance
     }
     
-    func identify(image: UIImage, completionHandler:@escaping (((itemName: String, instructions: String, maximum: Int)?) -> ())) {
+    func identify(image: UIImage, lat: Double, lon: Double, completionHandler:@escaping (((category: String, rating: Double, name: String, price: String, image: URL)?) -> ())) {
         // Base64 encode the image and create the request
         let binaryImagePacket = base64EncodeImage(image)
         
-        createRequest(with: binaryImagePacket, completionHandler: completionHandler)
+        createRequest(with: binaryImagePacket,lat: lat, lon: lon, completionHandler: completionHandler)
     }
     
     func resizeImage(_ imageSize: CGSize, image: UIImage) -> Data {
@@ -57,7 +57,7 @@ class GoogleAPIManager {
         return (imagedata.base64EncodedString(options: .endLineWithCarriageReturn), image.size)
     }
     
-    func createRequest(with imageBase64: (String, CGSize), completionHandler: @escaping (((itemName: String, instructions: String, maximum: Int)?) -> ())) {
+    func createRequest(with imageBase64: (String, CGSize), lat: Double, lon: Double, completionHandler: @escaping (((category: String, rating: Double, name: String, price: String, image: URL)?) -> ())) {
         // Create our request URL
         
         var request = URLRequest(url: googleURL)
@@ -84,6 +84,7 @@ class GoogleAPIManager {
                 ]
             ]
         ]
+        
         let jsonObject = JSON(jsonRequest)
         
         // Serialize the JSON
@@ -138,18 +139,19 @@ class GoogleAPIManager {
                     }
                     print(responses)
                     var lowestResponseNum = 1000
-                    var lowestResponse: (instructions: String, maximum: Int)? = nil
+                    var lowestResponse: (category: String, rating: Double, name: String, price: String, image: URL)? = nil
                     for response in responses {
                         let handler = {
-                            (data: (instructions: String, maximum: Int)?) in
+                            (data: (category: String, rating: Double, name: String, price: String, image: URL)?) in
                             if data != nil {
                                 let responseIndex = responses.index(of: response)
-                                print("Response: \(String(describing: responseIndex)) \(response)")
                                 if responseIndex! <= lowestResponseNum {
                                     lowestResponseNum = responseIndex!
                                     lowestResponse = data
                                 }
+                                print("DispatchQueue.global() DATA", data)
                             }
+                            
                             calls += 1
                             if calls == responses.count {
                                 if lowestResponseNum == 1000{
@@ -157,15 +159,15 @@ class GoogleAPIManager {
                                     completionHandler(nil)
                                 }else{
                                     print("FINAL RESULT")
-                                    print("\(responses[lowestResponseNum]), \nmax: \(lowestResponse!.maximum), \ninstructions: \(lowestResponse!.instructions)")
                                     print("7----------------")
-                                    completionHandler((responses[lowestResponseNum], lowestResponse!.instructions, lowestResponse!.maximum))
                                     
+                                    completionHandler((lowestResponse!.category, lowestResponse!.rating, lowestResponse!.name, lowestResponse!.price,lowestResponse!.image))
+                                    //(category: String, rating: Double, name: String, price: String, image: URL)
                                 }
                             }
                         }
                         print("GOOGLE API RESPONSE: ",response)
-                        apiManager.getBusinessInfo("\(response)", completionHandler: handler)
+                        apiManager.getBusinessInfo("\(response)",lat: lat, lon: lon, completionHandler: handler)
                     }
                     
                 })
