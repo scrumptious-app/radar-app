@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class GoogleAPIManager {
     
-    var googleAPIKey = "AIzaSyBNed9n7O5T6hsEJ8lrvZVz-L00Q0F_h3w"
+    var googleAPIKey = "AIzaSyApaQH7UAaP8f72yjI0xWaAnQTeq4s9JlU"
     var googleURL: URL {
         return URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(googleAPIKey)")!
     }
@@ -32,7 +32,6 @@ class GoogleAPIManager {
         // Base64 encode the image and create the request
         let binaryImagePacket = base64EncodeImage(image)
         
-        //FIX ME
         createRequest(with: binaryImagePacket, completionHandler: completionHandler)
     }
     
@@ -163,7 +162,7 @@ class GoogleAPIManager {
                                 }
                             }
                         }
-            
+                        print("GOOGLE API RESPONSE: ",response)
                         apiManager.getBusinessInfo("\(response)", completionHandler: handler)
                     }
                     

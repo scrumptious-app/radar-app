@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to recognize business logo</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Use to recognize business logo</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Location to improve accuracy of api</string>
 	<key>NSLocationAlwaysUsageDescription

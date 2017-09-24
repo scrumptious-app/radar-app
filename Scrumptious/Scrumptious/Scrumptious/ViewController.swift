@@ -36,7 +36,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     
     var shopCards: [SCNNode] = []
     var imageBacks: [UIView] = []
-    var fetchingResults = true
+    var fetchingResults = false
     
     // Card Info
     let titleLabel = UILabel()
@@ -45,11 +45,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     let refillLabel = UILabel()
     var waitTime = 5
     
+    var nodeArray = [SCNNode]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the view's delegate
         sceneView.delegate = self
+        sceneView.isUserInteractionEnabled = true
         activityIndicatorBack.isHidden = true
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
@@ -133,14 +136,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         
         //sceneView.session.pause()
         
-        for node in shopCards {
-            node.removeFromParentNode()
-        }
-        
-        for back in imageBacks {
-            back.removeFromSuperview()
-        }
-        
+        self.deleteNodes()
         shopCards.removeAll()
         imageBacks.removeAll()
 
@@ -197,6 +193,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         self.tipLbl.isHidden = true
         UIApplication.shared.beginIgnoringInteractionEvents()
         
+        //Takes Image
+        let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
+        if pixbuff == nil { return }
+        let ciImage = CIImage(cvPixelBuffer: pixbuff!)
+        var image = convertCItoUIImage(cmage: ciImage)
+        image = image.crop(to: CGSize(width: image.size.width, height: image.size.width))
+        image = image.zoom(to: 4.0) ?? image
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }, completionHandler: { success, error in
+            if success {
+                print("Saved successfully")
+                // Saved successfully!
+            }
+        })
+
+        GoogleAPIManager.shared().identify(image: image, completionHandler: { (result) in
+            
+            
+            //Assign Values to Cell
+        })
+        self.activityIndicatorView.stopAnimating()
+        self.activityIndicatorBack.isHidden = true
+        self.crosshairView.isHidden = false
+        self.tipLbl.isHidden = false
+        UIApplication.shared.endIgnoringInteractionEvents()
+        
         print("Should start loading")
     }
     
@@ -221,7 +244,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             fetchingResults = true
 
             let screenCentre: CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
-        
             let arHitTestResults: [ARHitTestResult] = sceneView.hitTest(screenCentre, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
             guard let closestResult = arHitTestResults.first else {
                 stopLoader()
@@ -391,6 +413,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             textNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
             backNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
             infoNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
+            
+            //Save nodes in array
+            self.nodeArray.append(infoNode)
+            self.nodeArray.append(textNode)
+            self.nodeArray.append(backNode)
+            
             self.shopCards.append(infoNode)
         
         }
@@ -398,93 +426,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         fetchingResults = false
         stopLoader()
     }
-}
-
-extension UIImage {
     
-    func crop(to:CGSize) -> UIImage {
-        guard let cgimage = self.cgImage else { return self }
-        
-        let contextImage: UIImage = UIImage(cgImage: cgimage)
-        
-        let contextSize: CGSize = contextImage.size
-        
-        //Set to square
-        var posX: CGFloat = 0.0
-        var posY: CGFloat = 0.0
-        let cropAspect: CGFloat = to.width / to.height
-        
-        var cropWidth: CGFloat = to.width
-        var cropHeight: CGFloat = to.height
-        
-        if to.width > to.height { //Landscape
-            cropWidth = contextSize.width
-            cropHeight = contextSize.width / cropAspect
-            posY = (contextSize.height - cropHeight) / 2
-        } else if to.width < to.height { //Portrait
-            cropHeight = contextSize.height
-            cropWidth = contextSize.height * cropAspect
-            posX = (contextSize.width - cropWidth) / 2
-        } else { //Square
-            if contextSize.width >= contextSize.height { //Square on landscape (or square)
-                cropHeight = contextSize.height
-                cropWidth = contextSize.height * cropAspect
-                posX = (contextSize.width - cropWidth) / 2
-            }else{ //Square on portrait
-                cropWidth = contextSize.width
-                cropHeight = contextSize.width / cropAspect
-                posY = (contextSize.height - cropHeight) / 2
-            }
+    func deleteNodes(){
+        for node in nodeArray{
+            node.removeFromParentNode()
         }
-        
-        let rect: CGRect = CGRect(x: posX, y: posY, width: cropWidth, height: cropHeight)
-        // Create bitmap image from context using the rect
-        let imageRef: CGImage = contextImage.cgImage!.cropping(to: rect)!
-        
-        // Create a new image based on the imageRef and rotate back to the original orientation
-        let cropped: UIImage = UIImage(cgImage: imageRef, scale: self.scale, orientation: .right)
-        
-        UIGraphicsBeginImageContextWithOptions(to, true, self.scale)
-        cropped.draw(in: CGRect(x: 0, y: 0, width: to.width, height: to.height))
-        let resized = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return resized!
-    }
-    
-    func zoom(to scale: CGFloat) -> UIImage? {
-        var sideLength: CGFloat = 0;
-        let imageHeight = self.size.height
-        let imageWidth = self.size.width
-        
-        if imageHeight > imageWidth {
-            sideLength = imageWidth
-        }
-        else {
-            sideLength = imageHeight
-        }
-        
-        let size = CGSize(width: sideLength, height: sideLength)
-        
-        let x = (size.width / 2) - (size.width / (2 * scale))
-        let y = (size.height / 2) - (size.width / (2 * scale))
-        
-        let cropRect = CGRect(x: x, y: y, width: size.width / scale, height: size.height / scale)
-        if let imageRef = cgImage!.cropping(to: cropRect) {
-            return UIImage(cgImage: imageRef, scale: 1.0, orientation: imageOrientation)
-        }
-        
-        return nil
-    }
-}
-
-
-extension UIImage {
-    class func imageWithView(view: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
     }
 }
