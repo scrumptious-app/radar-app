@@ -199,8 +199,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         
         nearYouView.roundCorners(corners: [.topLeft , .topRight], radius: 16)
         if locationManager != nil{
-            print("latitude", locationManager.location!.coordinate.latitude)
-            print("longitude", locationManager.location!.coordinate.longitude)
         }
     }
     
@@ -351,6 +349,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                 friendsCount = 5
             }
             
+            if friendsCount >= 1{
             let friendImg3 = UIImageView()
             friendImg3.frame = CGRect(x: 340, y: 450, width: 120, height: 120)
             friendImg3.contentMode = .scaleAspectFill
@@ -358,22 +357,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             friendImg3.layer.masksToBounds = true
             friendImg3.image = UIImage(named: "pic2")
             imageView.addSubview(friendImg3)
+            }
             
-            let friendImg4 = UIImageView()
-            friendImg4.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
-            friendImg4.contentMode = .scaleAspectFill
-            friendImg4.layer.cornerRadius = 60
-            friendImg4.layer.masksToBounds = true
-            friendImg4.image = UIImage(named: "pic3")
-            imageView.addSubview(friendImg4)
+            else if friendsCount >= 3{
+                let friendImg2 = UIImageView()
+                friendImg2.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
+                friendImg2.contentMode = .scaleAspectFill
+                friendImg2.layer.cornerRadius = 60
+                friendImg2.layer.masksToBounds = true
+                friendImg2.image = UIImage(named: "pic3")
+                imageView.addSubview(friendImg2)
+                
+                let friendImg4 = UIImageView()
+                friendImg4.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
+                friendImg4.contentMode = .scaleAspectFill
+                friendImg4.layer.cornerRadius = 60
+                friendImg4.layer.masksToBounds = true
+                friendImg4.image = UIImage(named: "pic1")
+                imageView.addSubview(friendImg4)
+            }
             
-            let friendImg5 = UIImageView()
-            friendImg5.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
-            friendImg5.contentMode = .scaleAspectFill
-            friendImg5.layer.cornerRadius = 60
-            friendImg5.layer.masksToBounds = true
-            friendImg5.image = UIImage(named: "pic4")
-            imageView.addSubview(friendImg5)
+            else if friendsCount >= 5{
+                let friendImg1 = UIImageView()
+                friendImg1.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
+                friendImg1.contentMode = .scaleAspectFill
+                friendImg1.layer.cornerRadius = 60
+                friendImg1.layer.masksToBounds = true
+                friendImg1.image = UIImage(named: "pic4")
+                imageView.addSubview(friendImg1)
+                
+                let friendImg5 = UIImageView()
+                friendImg5.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
+                friendImg5.contentMode = .scaleAspectFill
+                friendImg5.layer.cornerRadius = 60
+                friendImg5.layer.masksToBounds = true
+                friendImg5.image = UIImage(named: "pic0")
+                imageView.addSubview(friendImg5)
+            }
             
             limitLabel.frame = CGRect(x: 0, y: 270, width: 400, height: 63)
             limitLabel.textAlignment = .center

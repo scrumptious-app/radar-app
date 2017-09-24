@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-var business: BusinessProfiles?
+var businesses: BusinessProfiles?
 
 class BusinessProfiles{
     
@@ -20,9 +20,7 @@ class BusinessProfiles{
     var price: Double?
     var rating: Double?
     var catTitle: String?
-    var id: String?
-    var friendsImages: [UIImage]?
-    var menu: [String]?
+    var image: URL?
     
     let session = URLSession.shared
     
@@ -40,7 +38,7 @@ class BusinessProfiles{
         
     }
     
-    func append(name: String?, price: Double?, rating: Double?, catTitle: String?, id: String?, friendsImages: [UIImage]?, menu: [String]?){
+    func append(name: String?, price: Double?, rating: Double?, catTitle: String?, image: URL?){
         if name != nil{
             self.name = name
         }
@@ -50,25 +48,23 @@ class BusinessProfiles{
         if catTitle != nil{
             self.catTitle = catTitle
         }
-        if id != nil{
-            self.id = id
-        }
         if price != nil{
             self.price = price
         }
-        if friendsImages != nil{
-            self.friendsImages = friendsImages
-        }
-        if menu != nil{
-            self.menu = menu
+        if image != nil{
+            self.image = image
         }
     }
     
     func appendData(data: [String:Any]){
         
     }
-    
+}
+   /*
     func updateNearby(){
+        
+        if businesses != nil{
+        
         var request = URLRequest(url: URL(string: "https://app.bracer90.hasura-app.io/nearby?latitude=42.302851&longitude=-83.705924")!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -76,8 +72,6 @@ class BusinessProfiles{
         DispatchQueue.global().async {
             let task: URLSessionDataTask = self.session.dataTask(with: request) { (data, response, error) in
                 
-                print("RESPONSE FROM GETBUSINESS",response )
-                print("DATA FROM GETBUSINESS", data )
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "")
                     return
@@ -85,13 +79,19 @@ class BusinessProfiles{
                 
                 DispatchQueue.main.async(execute: {
                     // Use SwiftyJSON to parse results
-                    let json = JSON(data: data)
+                    let json1 = JSON(data: data)
+                    let dataArray = json1["data"].first?.1
                     
-                    for data in json{
-                        
+                    for business in dataArray!{
+                        businesses?.append(name: business.1["name"].string, price: business.1["price"].double , rating: business.1["rating"].double , catTitle: business.1["catTitle"].string, image: business.1["image"].url)
+                        print(businesses)
                     }
+                    
+                    
                 })
             }
         }
     }
 }
+
+*/

@@ -6,7 +6,9 @@
 //  Copyright © 2017 scrumptious. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import SDWebImage
 
 class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -49,6 +51,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+        
         
         return 100
     }
@@ -57,6 +61,149 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: StoreCell = tableView.dequeueReusableCell(withIdentifier: "StoreCell", for: indexPath as IndexPath) as! StoreCell
+        
+        if indexPath.row == 0{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Starbucks"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starGrey")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = "$$"
+        }
+        else if indexPath.row == 1{
+            
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Ann Arbor Bed and Breakfast"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starYellow")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = "$$"
+        }
+        else if indexPath.row == 2{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Orangetheory Fitness"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starYellow")
+            cell.star5.image = UIImage(named: "starYellow")
+            
+            cell.storeDistance.text = ""
+        }
+        else if indexPath.row == 3{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Ita Yoga Studio"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starYellow")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = ""
+        }
+        else if indexPath.row == 4{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "The Songbird Cafe"
+            
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starYellow")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = "$$"
+        }
+        else if indexPath.row == 5{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Evergreen Restaurant"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starGrey")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = "$$"
+        }
+        else if indexPath.row == 6{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "The Petting Farm at Domino's Farms"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starYellow")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = "$$"
+        }
+        else if indexPath.row == 7{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Pure Visibility"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starYellow")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = ""
+        }
+        else if indexPath.row == 8{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Subway"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starGrey")
+            cell.star4.image = UIImage(named: "starGrey")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = "$"
+        }
+        else if indexPath.row == 9{
+            let tempUrl = URL(fileURLWithPath: "https://s3-media3.fl.yelpcdn.com/bphoto/y8Cs_r3JXr0T14zaPMiE6A/o.jpg")
+            
+            cell.storeImg.sd_setImage(with: tempUrl, placeholderImage: UIImage(named: "noimg"))
+            cell.storeTitle.text = "Leslie Park Golf Course"
+            
+            cell.star1.image = UIImage(named: "starYellow")
+            cell.star2.image = UIImage(named: "starYellow")
+            cell.star3.image = UIImage(named: "starYellow")
+            cell.star4.image = UIImage(named: "starYellow")
+            cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeDistance.text = ""
+        }
         
         return cell
     }
