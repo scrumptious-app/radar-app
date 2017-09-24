@@ -32,6 +32,7 @@ class HasuraAPIManager {
         
         // Create our request URL
         
+        
         var request = URLRequest(url: URL(string: "https://app.bracer90.hasura-app.io/search?name=\(business)&latitude=\(lat)&longitude=\(lon)")!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

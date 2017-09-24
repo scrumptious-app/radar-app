@@ -296,7 +296,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                 if result == nil{
                     self.stopLoader()
                     return
-                } else {
+                } 
+                else {
                     
                     // Get Coordinates of HitTest
                     let transform : matrix_float4x4 = closestResult.worldTransform
@@ -465,7 +466,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                 priceTxt.numberOfLines = 1
                 priceTxt.font = UIFont(name: "Avenir", size: 70)
                 priceTxt.backgroundColor = .clear
-                priceTxt.text = self.price
+                priceTxt.text = result!.price
                 
                 // Title
                 self.titleLabel.frame = CGRect(x: 30, y: 30, width: self.imageView.frame.width-128, height: 84)
@@ -473,7 +474,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                 self.titleLabel.numberOfLines = 1
                 self.titleLabel.font = UIFont(name: "Avenir", size: 84)
                 self.titleLabel.backgroundColor = .clear
-                self.titleLabel.text = self.name.capitalized
+                self.titleLabel.text = result!.name.capitalized
                 
                 self.imageView.addSubview(starsImg)
                 self.imageView.addSubview(self.titleLabel)
@@ -488,7 +489,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                 
                 
                 
-                starsImg.image = UIImage(named: "\(Int(self.rating))stars")
+                starsImg.image = UIImage(named: "\(Int(result!.rating))stars")
                 
                 infoGeometry.firstMaterial?.diffuse.contents = texture
                 infoNode.geometry = infoGeometry

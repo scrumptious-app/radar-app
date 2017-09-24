@@ -74,6 +74,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star4.image = UIImage(named: "starGrey")
             cell.star5.image = UIImage(named: "starGrey")
             
+            cell.storeReview.text = "Starbucks Corporation is an American coffee company and coffeehouse chain."
+            
             cell.storeDistance.text = "$$"
         }
         else if indexPath.row == 1{
@@ -88,6 +90,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star3.image = UIImage(named: "starYellow")
             cell.star4.image = UIImage(named: "starYellow")
             cell.star5.image = UIImage(named: "starGrey")
+            //Ann Arbor lodging B&B inn, boutique hotel on campus downtown with king beds, hot breakfast, free on-site parking, WiFi, en suite bathrooms
+            cell.storeReview.text = "Ann Arbor lodging B&B inn, boutique hotel on campus downtown with king beds, hot breakfast, free on-site parking, WiFi, en suite bathrooms."
             
             cell.storeDistance.text = "$$"
         }
@@ -103,6 +107,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star4.image = UIImage(named: "starYellow")
             cell.star5.image = UIImage(named: "starYellow")
             
+            cell.storeReview.text = "The physiological theory behind Orangetheory is known as excess post-exercise oxygen consumption."
+            
             cell.storeDistance.text = ""
         }
         else if indexPath.row == 3{
@@ -116,6 +122,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star3.image = UIImage(named: "starYellow")
             cell.star4.image = UIImage(named: "starYellow")
             cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeReview.text = "Vinyasa flow style yoga in an Infrared Heated spacious studio. From Gentle and Yin practice to Guided Vinyasa and Power Flow"
             
             cell.storeDistance.text = ""
         }
@@ -132,6 +140,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star4.image = UIImage(named: "starYellow")
             cell.star5.image = UIImage(named: "starGrey")
             
+            cell.storeReview.text = "Creative American eatery serving espresso drinks, soups, sandwiches & baked goods in a cozy setting."
+            
             cell.storeDistance.text = "$$"
         }
         else if indexPath.row == 5{
@@ -145,6 +155,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star3.image = UIImage(named: "starYellow")
             cell.star4.image = UIImage(named: "starGrey")
             cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeReview.text = "Spacious Chinese standby lures locals with its regional dishes, lunch deals & laid-back atmosphere."
             
             cell.storeDistance.text = "$$"
         }
@@ -160,6 +172,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star4.image = UIImage(named: "starYellow")
             cell.star5.image = UIImage(named: "starGrey")
             
+            cell.storeReview.text = "A wonderful, serene place to bring family and friends for a memorable day! "
+            
             cell.storeDistance.text = "$$"
         }
         else if indexPath.row == 7{
@@ -173,6 +187,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star3.image = UIImage(named: "starYellow")
             cell.star4.image = UIImage(named: "starYellow")
             cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeReview.text = "Are you looking to maximize ROI from your digital marketing campaigns? Pure Visibility provides expert SEO, PPC, social media and analytics services."
             
             cell.storeDistance.text = ""
         }
@@ -188,6 +204,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star4.image = UIImage(named: "starGrey")
             cell.star5.image = UIImage(named: "starGrey")
             
+            cell.storeReview.text = "Subway IP Inc. is a privately held American fast food restaurant franchise that primarily sells submarine sandwiches and salads."
+            
             cell.storeDistance.text = "$"
         }
         else if indexPath.row == 9{
@@ -201,6 +219,8 @@ class AllFoodVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell.star3.image = UIImage(named: "starYellow")
             cell.star4.image = UIImage(named: "starYellow")
             cell.star5.image = UIImage(named: "starGrey")
+            
+            cell.storeReview.text = "The award-winning Leslie Park Golf Course is a beautiful par 72, 18-hole, 6,611-yard golf championship course set on the rolling hills of northeast Ann Arbor."
             
             cell.storeDistance.text = ""
         }
