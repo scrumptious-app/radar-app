@@ -101,7 +101,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         // Pulsing
         let pulseAnimation = CABasicAnimation(keyPath: "opacity")
         pulseAnimation.duration = 1.2
-        pulseAnimation.fromValue = 0.1
+        pulseAnimation.fromValue = 0.2
         pulseAnimation.toValue = 1
         pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         pulseAnimation.autoreverses = true
@@ -238,7 +238,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
 
     }
     
+    @objc func handleTap(gestureRecognizeNode: UITapGestureRecognizer) {
+        
+        print("Tapped Node")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
+        
+        let imageView = UIView()
         
         if fetchingResults == false {
             fetchingResults = true
@@ -288,7 +299,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             backNode.position.y += 0.09
         
             //Set up card view
-            let imageView = UIView(frame: CGRect(x: 0, y: 0, width: 800, height: 600))
+            imageView.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
             imageView.backgroundColor = .clear
             imageView.alpha = 1.0
             self.imageBacks.append(imageView)
@@ -327,66 +338,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                 friendsCount = 5
             }
             
-            var x = 0
-            while x <= friendsCount{
-                if friendsImageIndex["pic\(x)"] == nil{
-                    let friendImage = UIImage(named: "pic\(x)")
-                    friendsImageIndex["pic\(x)"] = friendImage
-                    x += 1
-                }
-            }
+            let friendImg3 = UIImageView()
+            friendImg3.frame = CGRect(x: 340, y: 450, width: 120, height: 120)
+            friendImg3.contentMode = .scaleAspectFill
+            friendImg3.layer.cornerRadius = 60
+            friendImg3.layer.masksToBounds = true
+            friendImg3.image = UIImage(named: "pic2")
+            imageView.addSubview(friendImg3)
             
-            let friendImageArray = Array(friendsImageIndex)
+            let friendImg4 = UIImageView()
+            friendImg4.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
+            friendImg4.contentMode = .scaleAspectFill
+            friendImg4.layer.cornerRadius = 60
+            friendImg4.layer.masksToBounds = true
+            friendImg4.image = UIImage(named: "pic3")
+            imageView.addSubview(friendImg4)
             
-            //Friends on the corners of view
-            if friendsCount == 5{
-                let friendImg1 = UIImageView()
-                friendImg1.frame = CGRect(x: 25, y: 450, width: 120, height: 120)
-                friendImg1.contentMode = .scaleAspectFill
-                friendImg1.layer.cornerRadius = 60
-                friendImg1.layer.masksToBounds = true
-                friendImg1.image = friendImageArray[3].value
-                imageView.addSubview(friendImg1)
-                
-                let friendImg5 = UIImageView()
-                friendImg5.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
-                friendImg5.contentMode = .scaleAspectFill
-                friendImg5.layer.cornerRadius = 60
-                friendImg5.layer.masksToBounds = true
-                friendImg5.image = friendImageArray[4].value
-                imageView.addSubview(friendImg5)
-            }else{
-                
-            }
-            
-            if friendsCount >= 3{
-                let friendImg2 = UIImageView()
-                friendImg2.frame = CGRect(x: 180, y: 450, width: 120, height: 120)
-                friendImg2.contentMode = .scaleAspectFill
-                friendImg2.layer.cornerRadius = 60
-                friendImg2.layer.masksToBounds = true
-                friendImg2.image = friendImageArray[1].value
-                imageView.addSubview(friendImg2)
-                
-                let friendImg4 = UIImageView()
-                friendImg4.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
-                friendImg4.contentMode = .scaleAspectFill
-                friendImg4.layer.cornerRadius = 60
-                friendImg4.layer.masksToBounds = true
-                friendImg4.image = friendImageArray[2].value
-                imageView.addSubview(friendImg4)
-            }
-            
-            if friendsCount >= 1{
-                let friendImg3 = UIImageView()
-                friendImg3.frame = CGRect(x: 340, y: 450, width: 120, height: 120)
-                friendImg3.contentMode = .scaleAspectFill
-                friendImg3.layer.cornerRadius = 60
-                friendImg3.layer.masksToBounds = true
-                friendImg3.image = friendImageArray[0].value
-                imageView.addSubview(friendImg3)
-            }
-
+            let friendImg5 = UIImageView()
+            friendImg5.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
+            friendImg5.contentMode = .scaleAspectFill
+            friendImg5.layer.cornerRadius = 60
+            friendImg5.layer.masksToBounds = true
+            friendImg5.image = UIImage(named: "pic4")
+            imageView.addSubview(friendImg5)
             
             limitLabel.frame = CGRect(x: 0, y: 270, width: 400, height: 63)
             limitLabel.textAlignment = .center
@@ -404,7 +378,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             refillLabel.backgroundColor = .clear
             refillLabel.textColor = UIColor.darkGray
             imageView.addSubview(refillLabel)
-        
+            
+            // Goes from $ to $$$
             let priceTxt = UILabel()
             priceTxt.frame = CGRect(x: 400, y: 270, width: 400, height: 63)
             priceTxt.textAlignment = .center
