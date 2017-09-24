@@ -32,7 +32,12 @@ class GoogleAPIManager {
         // Base64 encode the image and create the request
         let binaryImagePacket = base64EncodeImage(image)
         
-        createRequest(with: binaryImagePacket,lat: lat, lon: lon, completionHandler: completionHandler)
+        if Bools.fetchingResults == false {
+            createRequest(with: binaryImagePacket,lat: lat, lon: lon, completionHandler: completionHandler)
+        } else {
+            print("ERROR in IDENTIFY")
+        }
+        
     }
     
     func resizeImage(_ imageSize: CGSize, image: UIImage) -> Data {
@@ -96,6 +101,9 @@ class GoogleAPIManager {
         
         // Run the request on a background thread
         DispatchQueue.global().async {
+            
+            Bools.fetchingResults = true
+            
             let task: URLSessionDataTask = self.session.dataTask(with: request) { (data, response, error) in
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription ?? "")
@@ -111,6 +119,7 @@ class GoogleAPIManager {
                     let errorObj: JSON = json["error"]
                     if (errorObj.dictionaryValue != [:]) {
                         print("Error code \(errorObj["code"]): \(errorObj["message"])")
+                        
                     }
                     //                    print(json)
                     var responses: [String] = []
@@ -161,11 +170,13 @@ class GoogleAPIManager {
                                     print("FINAL RESULT")
                                     print("7----------------")
                                     
+                                    
                                     completionHandler((lowestResponse!.category, lowestResponse!.rating, lowestResponse!.name, lowestResponse!.price,lowestResponse!.image))
                                     //(category: String, rating: Double, name: String, price: String, image: URL)
                                 }
                             }
                         }
+                        
                         print("GOOGLE API RESPONSE: ",response)
                         if response != nil{
                         apiManager.getBusinessInfo("\(response)",lat: lat, lon: lon, completionHandler: handler)
@@ -176,6 +187,7 @@ class GoogleAPIManager {
             }
             
             task.resume()
+            Bools.fetchingResults = false
         }
     }
     
@@ -186,5 +198,3 @@ class GoogleAPIManager {
         return Double(sqrt(xDist * xDist + yDist * yDist))
     }
 }
-
-
