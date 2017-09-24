@@ -269,7 +269,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             
             let screenCentre: CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
             let arHitTestResults: [ARHitTestResult] = sceneView.hitTest(screenCentre, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
-            guard let closestResult = arHitTestResults.first else {
+            guard let closestResult = arHitTestResults.last else {
                 stopLoader()
                 return
             }
