@@ -459,6 +459,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             //imageView.reloadInputViews()
             titleLabel.setNeedsDisplay()
             titleLabel.draw(CGRect(x: 30, y: 30, width: imageView.frame.width-128, height: 84))
+            priceTxt.setNeedsDisplay()
+            priceTxt.draw(CGRect(x: 400, y: 270, width: 400, height: 63))
             
             
             
