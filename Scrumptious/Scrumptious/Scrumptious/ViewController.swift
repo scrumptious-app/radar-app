@@ -34,9 +34,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     var activityIndicatorBack = UIView()
     var loadingLbl = UILabel()
     
-    var businessCards: [SCNNode] = []
+    var shopCards: [SCNNode] = []
+    var imageBacks: [UIView] = []
+    var fetchingResults = true
     
-    var businessButtons: [SCNNode] = []
+    // Card Info
+    let titleLabel = UILabel()
+    let lastTakenLabel = UILabel()
+    let limitLabel = UILabel()
+    let refillLabel = UILabel()
+    var waitTime = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,32 +181,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         self.performSegue(withIdentifier: "showList", sender: nil)
     }
     
-    @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
+    func stopLoader() {
+        self.activityIndicatorView.stopAnimating()
+        self.activityIndicatorBack.isHidden = true
+        self.crosshairView.isHidden = false
+        self.tipLbl.isHidden = false
+        UIApplication.shared.endIgnoringInteractionEvents()
         
-        print("TAPPED")
-        activityIndicatorBack.isHidden = false
-        crosshairView.isHidden = true
-        tipLbl.isHidden = true
-        // Loader
-        activityIndicatorBack.frame = CGRect(x: (sceneView.frame.size.width / 2) - 75, y: sceneView.frame.size.height / 2 - 60, width: 150, height: 50)
-        activityIndicatorBack.backgroundColor = UIColor(red: 246/255, green: 218/255, blue: 77/255, alpha: 1.0)
-        activityIndicatorBack.layer.cornerRadius = 6
-        sceneView.addSubview(activityIndicatorBack)
-        
-        activityIndicatorView.frame = CGRect(x: 5, y: (activityIndicatorBack.frame.size.height / 2) - 25, width: 50, height: 50)
-        activityIndicatorView.hidesWhenStopped = true
-        activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
-        activityIndicatorBack.addSubview(activityIndicatorView)
-        
-        loadingLbl.text = "LOADING"
-        loadingLbl.textAlignment = .left
-        loadingLbl.textColor = UIColor.white
-        loadingLbl.font = UIFont(name: "Avenir-Medium", size: 16)
-        loadingLbl.frame = CGRect(x: activityIndicatorView.frame.maxX, y: 0, width: activityIndicatorBack.frame.size.width - activityIndicatorView.frame.maxX, height: 50)
-        activityIndicatorBack.addSubview(loadingLbl)
-       
-        // Start Animation
-        activityIndicatorView.startAnimating()
+        print("Should stop loading")
+    }
+    
+    func startLoader() {
+        self.activityIndicatorView.startAnimating()
+        self.activityIndicatorBack.isHidden = false
+        self.crosshairView.isHidden = true
+        self.tipLbl.isHidden = true
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         //Takes Image
@@ -233,7 +229,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         self.tipLbl.isHidden = false
         UIApplication.shared.endIgnoringInteractionEvents()
         
-        print("Should stop loading")
+        print("Should start loading")
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
