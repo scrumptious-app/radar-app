@@ -34,10 +34,7 @@ class HasuraAPIManager {
         
         var request = URLRequest(url: URL(string: "https://app.bracer90.hasura-app.io/search?name=\(business)&latitude=\(lat)&longitude=\(lon)")!)
         request.httpMethod = "GET"
-        print("request before", request)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        print("request after", request )
-        print("WE ARE IN FUNCTION getBusinessInfo")
         
         // Run the request on a background thread
         DispatchQueue.global().async {

@@ -8,10 +8,13 @@
 
 import Foundation
 import UIKit
+import Foundation
+import UIKit
+import SwiftyJSON
 
-var business: BusinessProfile?
+var business: BusinessProfiles?
 
-class BusinessProfile{
+class BusinessProfiles{
     
     var name: String?
     var price: Double?
@@ -21,7 +24,23 @@ class BusinessProfile{
     var friendsImages: [UIImage]?
     var menu: [String]?
     
-    init(name: String?, price: Double?, rating: Double?, catTitle: String?, id: String?, friendsImages: [UIImage]?, menu: [String]?){
+    let session = URLSession.shared
+    
+    static var sharedInstance: HasuraAPIManager = {
+        let apiManager = HasuraAPIManager()
+        
+        return apiManager
+    }()
+    
+    class func shared() -> HasuraAPIManager {
+        return sharedInstance
+    }
+    
+    init(){
+        
+    }
+    
+    func append(name: String?, price: Double?, rating: Double?, catTitle: String?, id: String?, friendsImages: [UIImage]?, menu: [String]?){
         if name != nil{
             self.name = name
         }
@@ -42,6 +61,37 @@ class BusinessProfile{
         }
         if menu != nil{
             self.menu = menu
+        }
+    }
+    
+    func appendData(data: [String:Any]){
+        
+    }
+    
+    func updateNearby(){
+        var request = URLRequest(url: URL(string: "https://app.bracer90.hasura-app.io/nearby?latitude=42.302851&longitude=-83.705924")!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        DispatchQueue.global().async {
+            let task: URLSessionDataTask = self.session.dataTask(with: request) { (data, response, error) in
+                
+                print("RESPONSE FROM GETBUSINESS",response )
+                print("DATA FROM GETBUSINESS", data )
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    // Use SwiftyJSON to parse results
+                    let json = JSON(data: data)
+                    
+                    for data in json{
+                        
+                    }
+                })
+            }
         }
     }
 }
