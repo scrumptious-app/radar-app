@@ -54,7 +54,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         sceneView.delegate = self
         sceneView.isUserInteractionEnabled = true
         activityIndicatorBack.isHidden = true
-        sceneView.automaticallyUpdatesLighting = true
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognize:)))
         tapGesture.delegate = self
@@ -145,7 +144,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        sceneView.updateFocusIfNeeded()
+        
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         
