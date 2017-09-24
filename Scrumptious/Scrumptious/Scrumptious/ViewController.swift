@@ -199,7 +199,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         let ciImage = CIImage(cvPixelBuffer: pixbuff!)
         var image = convertCItoUIImage(cmage: ciImage)
         image = image.crop(to: CGSize(width: image.size.width, height: image.size.width))
-        image = image.zoom(to: 4.0) ?? image
+        image = image.zoom(to: 2.0) ?? image
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAsset(from: image)
         }, completionHandler: { success, error in
@@ -209,7 +209,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             }
         })
 
-        GoogleAPIManager.shared().identify(image: image, completionHandler: { (result) in
+        GoogleAPIManager.shared().identify(image: image, lat: locationManager.location!.coordinate.latitude, lon: locationManager.location!.coordinate.longitude, completionHandler: { (result) in
             
             
             //Assign Values to Cell
@@ -262,6 +262,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             }
             
             startLoader()
+            
+            //Takes Image
+            let pixbuff : CVPixelBuffer? = (sceneView.session.currentFrame?.capturedImage)
+            if pixbuff == nil { return }
+            let ciImage = CIImage(cvPixelBuffer: pixbuff!)
+            var image = convertCItoUIImage(cmage: ciImage)
+            image = image.crop(to: CGSize(width: image.size.width, height: image.size.width))
+            image = image.zoom(to: 2.0) ?? image
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAsset(from: image)
+            }, completionHandler: { success, error in
+                if success {
+                    print("Saved successfully")
+                    // Saved successfully!
+                }
+            })
 
             // Get Coordinates of HitTest
             let transform : matrix_float4x4 = closestResult.worldTransform
@@ -293,7 +309,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             titleLabel.numberOfLines = 1
             titleLabel.font = UIFont(name: "Avenir", size: 84)
             titleLabel.backgroundColor = .clear
-            titleLabel.text = "Chipotle"
             imageView.addSubview(titleLabel)
             
             let typeImg = UIImageView()
@@ -303,36 +318,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             typeImg.layer.masksToBounds = true
             typeImg.image = UIImage(named: "foodicon")
             imageView.addSubview(typeImg)
-        
-//            lastTakenLabel.frame = CGRect(x: 40, y: 440, width: imageView.frame.width-80, height: 42)
-//            lastTakenLabel.textAlignment = .left
-//            lastTakenLabel.numberOfLines = 1
-//            lastTakenLabel.font = UIFont(name: "Avenir", size: 30)
-//            lastTakenLabel.text = "Friends that've been here"
-//            lastTakenLabel.backgroundColor = .clear
-//            imageView.addSubview(lastTakenLabel)
             
             let starsImg = UIImageView()
             starsImg.frame = CGRect(x: 25, y: 160, width: 400, height: 42)
             starsImg.contentMode = .scaleAspectFill
-            starsImg.image = UIImage(named: "5stars")
             imageView.addSubview(starsImg)
             
-            let friendImg1 = UIImageView()
-            friendImg1.frame = CGRect(x: 25, y: 450, width: 120, height: 120)
-            friendImg1.contentMode = .scaleAspectFill
-            friendImg1.layer.cornerRadius = 60
-            friendImg1.layer.masksToBounds = true
-            friendImg1.image = UIImage(named: "pic0")
-            imageView.addSubview(friendImg1)
+            //Friends Randomnizer
+            var friendsCount = arc4random_uniform(3)
+            var friendsImageIndex = [String: UIImage]()
             
-            let friendImg2 = UIImageView()
-            friendImg2.frame = CGRect(x: 180, y: 450, width: 120, height: 120)
-            friendImg2.contentMode = .scaleAspectFill
-            friendImg2.layer.cornerRadius = 60
-            friendImg2.layer.masksToBounds = true
-            friendImg2.image = UIImage(named: "pic1")
-            imageView.addSubview(friendImg2)
+            if friendsCount == 0{
+                friendsCount = 1
+            }
+            else if friendsCount == 1{
+                friendsCount = 3
+            }
+            else{
+                friendsCount = 5
+            }
             
             let friendImg3 = UIImageView()
             friendImg3.frame = CGRect(x: 340, y: 450, width: 120, height: 120)
@@ -381,10 +385,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             priceTxt.textAlignment = .center
             priceTxt.numberOfLines = 1
             priceTxt.font = UIFont(name: "Avenir", size: 70)
-            priceTxt.text = "$$$"
             priceTxt.backgroundColor = .clear
             imageView.addSubview(priceTxt)
-            
+
             let priceSub = UILabel()
             priceSub.frame = CGRect(x: 400, y: 360, width: 400, height: 42)
             priceSub.textAlignment = .center
@@ -399,6 +402,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         
             let infoNode = SCNNode()
             let infoGeometry = SCNPlane(width: 0.13, height: 0.09)
+            
+            
+            GoogleAPIManager.shared().identify(image: image,lat:locationManager.location!.coordinate.latitude, lon: locationManager.location!.coordinate.longitude, completionHandler: { (result) in
+                if result == nil{
+                    self.stopLoader()
+                    return
+                }
+                
+                //Setting Values for Business Card
+                if let cat = result?.category{
+                    
+                }
+                if let rating = result?.rating{
+                    starsImg.image = UIImage(named: "\(Int(rating))stars")
+                }
+                if let name = result?.name{
+                    self.titleLabel.text = name.capitalized
+                }
+                if let price = result?.price{
+                    priceTxt.text = price
+                }
+                if let image = result?.image{
+                    
+                }
+                //(category: String, rating: Double, name: String, price: String, image: URL)
+                self.stopLoader()
+            })
             
             infoGeometry.firstMaterial?.diffuse.contents = texture
             infoNode.geometry = infoGeometry

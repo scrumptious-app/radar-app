@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+var business: BusinessProfile?
+
 class BusinessProfile{
     
     var name: String?
