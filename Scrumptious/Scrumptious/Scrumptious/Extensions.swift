@@ -87,13 +87,6 @@ extension UIImage {
     }
 }
 
-func convertCItoUIImage(cmage:CIImage) -> UIImage
-{
-    let context:CIContext = CIContext.init(options: nil)
-    
-    let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
-    return UIImage(cgImage: cgImage)
-}
 
 extension UIImage {
     class func imageWithView(view: UIView) -> UIImage {
@@ -103,6 +96,14 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return img!
     }
+}
+
+func convertCItoUIImage(cmage:CIImage) -> UIImage
+{
+    let context:CIContext = CIContext.init(options: nil)
+    
+    let cgImage:CGImage = context.createCGImage(cmage, from: cmage.extent)!
+    return UIImage(cgImage: cgImage)
 }
 extension UIViewController{
     
