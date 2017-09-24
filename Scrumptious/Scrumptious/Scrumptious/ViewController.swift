@@ -101,7 +101,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
         // Pulsing
         let pulseAnimation = CABasicAnimation(keyPath: "opacity")
         pulseAnimation.duration = 1.2
-        pulseAnimation.fromValue = 0.1
+        pulseAnimation.fromValue = 0.2
         pulseAnimation.toValue = 1
         pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         pulseAnimation.autoreverses = true
@@ -238,7 +238,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
 
     }
     
+    @objc func handleTap(gestureRecognizeNode: UITapGestureRecognizer) {
+        
+        print("Tapped Node")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
     @objc func handleTap(gestureRecognize: UITapGestureRecognizer) {
+        
+        let imageView = UIView()
         
         if fetchingResults == false {
             fetchingResults = true
@@ -272,7 +283,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             backNode.position.y += 0.09
         
             //Set up card view
-            let imageView = UIView(frame: CGRect(x: 0, y: 0, width: 800, height: 600))
+            imageView.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
             imageView.backgroundColor = .clear
             imageView.alpha = 1.0
             self.imageBacks.append(imageView)
@@ -328,7 +339,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             friendImg3.contentMode = .scaleAspectFill
             friendImg3.layer.cornerRadius = 60
             friendImg3.layer.masksToBounds = true
-            friendImg3.image = UIImage(named: "pic0")
+            friendImg3.image = UIImage(named: "pic2")
             imageView.addSubview(friendImg3)
             
             let friendImg4 = UIImageView()
@@ -336,7 +347,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             friendImg4.contentMode = .scaleAspectFill
             friendImg4.layer.cornerRadius = 60
             friendImg4.layer.masksToBounds = true
-            friendImg4.image = UIImage(named: "pic0")
+            friendImg4.image = UIImage(named: "pic3")
             imageView.addSubview(friendImg4)
             
             let friendImg5 = UIImageView()
@@ -344,7 +355,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             friendImg5.contentMode = .scaleAspectFill
             friendImg5.layer.cornerRadius = 60
             friendImg5.layer.masksToBounds = true
-            friendImg5.image = UIImage(named: "pic1")
+            friendImg5.image = UIImage(named: "pic4")
             imageView.addSubview(friendImg5)
             
             limitLabel.frame = CGRect(x: 0, y: 270, width: 400, height: 63)
@@ -364,6 +375,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             refillLabel.textColor = UIColor.darkGray
             imageView.addSubview(refillLabel)
             
+            // Goes from $ to $$$
             let priceTxt = UILabel()
             priceTxt.frame = CGRect(x: 400, y: 270, width: 400, height: 63)
             priceTxt.textAlignment = .center
