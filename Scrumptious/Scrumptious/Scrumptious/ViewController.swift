@@ -269,7 +269,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
             
             let screenCentre: CGPoint = CGPoint(x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
             let arHitTestResults: [ARHitTestResult] = sceneView.hitTest(screenCentre, types: [.featurePoint]) // Alternatively, we could use '.existingPlaneUsingExtent' for more grounded hit-test-points.
-            guard let closestResult = arHitTestResults.last else {
+            guard let closestResult = arHitTestResults.first else {
                 stopLoader()
                 return
             }
@@ -290,151 +290,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                 }
             })
             
-            // Get Coordinates of HitTest
-            let transform : matrix_float4x4 = closestResult.worldTransform
-            
-            let worldCoord = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
-            
-            let billboardConstraint = SCNBillboardConstraint()
-            billboardConstraint.freeAxes = SCNBillboardAxis.Y
-            
-            let textNode = SCNNode()
-            textNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
-            textNode.opacity = 0.0
-            self.sceneView.scene.rootNode.addChildNode(textNode)
-            textNode.position = worldCoord
-            let backNode = SCNNode()
-            let plaque = SCNBox(width: 0.14, height: 0.1, length: 0.01, chamferRadius: 0.005)
-            plaque.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.6)
-            backNode.geometry = plaque
-            backNode.position.y += 0.09
-            
-            //Set up card view
-            imageView.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
-            imageView.backgroundColor = .clear
-            imageView.alpha = 1.0
-            self.imageBacks.append(imageView)
-            
-            //            titleLabel.frame = CGRect(x: 30, y: 30, width: imageView.frame.width-128, height: 84)
-            //            titleLabel.textAlignment = .left
-            //            titleLabel.numberOfLines = 1
-            //            titleLabel.font = UIFont(name: "Avenir", size: 84)
-            //            titleLabel.backgroundColor = .clear
-            //            imageView.addSubview(titleLabel)
-            
-            let typeImg = UIImageView()
-            typeImg.frame = CGRect(x: 640, y: 2, width: 140, height: 140)
-            typeImg.contentMode = .scaleAspectFill
-            typeImg.layer.cornerRadius = 70
-            typeImg.layer.masksToBounds = true
-            typeImg.image = UIImage(named: "foodicon")
-            imageView.addSubview(typeImg)
-            
-            let starsImg = UIImageView()
-            starsImg.frame = CGRect(x: 25, y: 160, width: 400, height: 42)
-            starsImg.contentMode = .scaleAspectFill
-            //            imageView.addSubview(starsImg)
-            
-            //Friends Randomnizer
-            var friendsCount = arc4random_uniform(3)
-            var friendsImageIndex = [String: UIImage]()
-            
-            if friendsCount == 0{
-                friendsCount = 1
-            }
-            else if friendsCount == 1{
-                friendsCount = 3
-            }
-            else{
-                friendsCount = 5
-            }
-            
-            if friendsCount >= 1{
-            let friendImg3 = UIImageView()
-            friendImg3.frame = CGRect(x: 340, y: 450, width: 120, height: 120)
-            friendImg3.contentMode = .scaleAspectFill
-            friendImg3.layer.cornerRadius = 60
-            friendImg3.layer.masksToBounds = true
-            friendImg3.image = UIImage(named: "pic2")
-            imageView.addSubview(friendImg3)
-            }
-            
-            else if friendsCount >= 3{
-                let friendImg2 = UIImageView()
-                friendImg2.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
-                friendImg2.contentMode = .scaleAspectFill
-                friendImg2.layer.cornerRadius = 60
-                friendImg2.layer.masksToBounds = true
-                friendImg2.image = UIImage(named: "pic3")
-                imageView.addSubview(friendImg2)
-                
-                let friendImg4 = UIImageView()
-                friendImg4.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
-                friendImg4.contentMode = .scaleAspectFill
-                friendImg4.layer.cornerRadius = 60
-                friendImg4.layer.masksToBounds = true
-                friendImg4.image = UIImage(named: "pic1")
-                imageView.addSubview(friendImg4)
-            }
-            
-            else if friendsCount >= 5{
-                let friendImg1 = UIImageView()
-                friendImg1.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
-                friendImg1.contentMode = .scaleAspectFill
-                friendImg1.layer.cornerRadius = 60
-                friendImg1.layer.masksToBounds = true
-                friendImg1.image = UIImage(named: "pic4")
-                imageView.addSubview(friendImg1)
-                
-                let friendImg5 = UIImageView()
-                friendImg5.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
-                friendImg5.contentMode = .scaleAspectFill
-                friendImg5.layer.cornerRadius = 60
-                friendImg5.layer.masksToBounds = true
-                friendImg5.image = UIImage(named: "pic0")
-                imageView.addSubview(friendImg5)
-            }
-            
-            limitLabel.frame = CGRect(x: 0, y: 270, width: 400, height: 63)
-            limitLabel.textAlignment = .center
-            limitLabel.numberOfLines = 1
-            limitLabel.font = UIFont(name: "Avenir", size: 70)
-            limitLabel.text = "\(waitTime) min"
-            limitLabel.backgroundColor = .clear
-            imageView.addSubview(limitLabel)
-            
-            refillLabel.frame = CGRect(x: 0, y: 360, width: 400, height: 42)
-            refillLabel.textAlignment = .center
-            refillLabel.numberOfLines = 1
-            refillLabel.font = UIFont(name: "Avenir-Medium", size: 42)
-            refillLabel.text = "WAIT"
-            refillLabel.backgroundColor = .clear
-            refillLabel.textColor = UIColor.darkGray
-            imageView.addSubview(refillLabel)
-            
-            // Goes from $ to $$$
-            let priceTxt = UILabel()
-            //            priceTxt.frame = CGRect(x: 400, y: 270, width: 400, height: 63)
-            //            priceTxt.textAlignment = .center
-            //            priceTxt.numberOfLines = 1
-            //            priceTxt.font = UIFont(name: "Avenir", size: 70)
-            //            priceTxt.backgroundColor = .clear
-            //            imageView.addSubview(priceTxt)
-            
-            let priceSub = UILabel()
-            priceSub.frame = CGRect(x: 400, y: 360, width: 400, height: 42)
-            priceSub.textAlignment = .center
-            priceSub.numberOfLines = 1
-            priceSub.font = UIFont(name: "Avenir-Medium", size: 42)
-            priceSub.text = "PRICE"
-            priceSub.backgroundColor = .clear
-            priceSub.textColor = UIColor.darkGray
-            imageView.addSubview(priceSub)
-            
-            let texture = UIImage.imageWithView(view: imageView)
-            
-            let infoNode = SCNNode()
-            let infoGeometry = SCNPlane(width: 0.13, height: 0.09)
             
             
             GoogleAPIManager.shared().identify(image: image,lat:locationManager.location!.coordinate.latitude, lon: locationManager.location!.coordinate.longitude, completionHandler: { (result) in
@@ -442,83 +297,238 @@ class ViewController: UIViewController, ARSCNViewDelegate, UIGestureRecognizerDe
                     self.stopLoader()
                     return
                 } else {
+                    
+                    // Get Coordinates of HitTest
+                    let transform : matrix_float4x4 = closestResult.worldTransform
+                    
+                    let worldCoord = SCNVector3Make(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+                    
+                    let billboardConstraint = SCNBillboardConstraint()
+                    billboardConstraint.freeAxes = SCNBillboardAxis.Y
+                    
+                    let textNode = SCNNode()
+                    textNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+                    textNode.opacity = 0.0
+                    self.sceneView.scene.rootNode.addChildNode(textNode)
+                    textNode.position = worldCoord
+                    let backNode = SCNNode()
+                    let plaque = SCNBox(width: 0.14, height: 0.1, length: 0.01, chamferRadius: 0.005)
+                    plaque.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.6)
+                    backNode.geometry = plaque
+                    backNode.position.y += 0.09
+                    
+                    //Set up card view
+                    self.imageView.frame = CGRect(x: 0, y: 0, width: 800, height: 600)
+                    self.imageView.backgroundColor = .clear
+                    self.imageView.alpha = 1.0
+                    self.imageBacks.append(self.imageView)
+                    
+                    //            titleLabel.frame = CGRect(x: 30, y: 30, width: imageView.frame.width-128, height: 84)
+                    //            titleLabel.textAlignment = .left
+                    //            titleLabel.numberOfLines = 1
+                    //            titleLabel.font = UIFont(name: "Avenir", size: 84)
+                    //            titleLabel.backgroundColor = .clear
+                    //            imageView.addSubview(titleLabel)
+                    
+                    let typeImg = UIImageView()
+                    typeImg.frame = CGRect(x: 640, y: 2, width: 140, height: 140)
+                    typeImg.contentMode = .scaleAspectFill
+                    typeImg.layer.cornerRadius = 70
+                    typeImg.layer.masksToBounds = true
+                    typeImg.image = UIImage(named: "foodicon")
+                    self.imageView.addSubview(typeImg)
+                    
+                    let starsImg = UIImageView()
+                    starsImg.frame = CGRect(x: 25, y: 160, width: 400, height: 42)
+                    starsImg.contentMode = .scaleAspectFill
+                    //            imageView.addSubview(starsImg)
+                    
+                    //Friends Randomnizer
+                    var friendsCount = arc4random_uniform(3)
+                    
+                    if friendsCount == 0{
+                        friendsCount = 1
+                    }
+                    else if friendsCount == 1{
+                        friendsCount = 3
+                    }
+                    else{
+                        friendsCount = 5
+                    }
+                    
+                    var friendList = [Int]()
+                    for _ in 0..<friendsCount{
+                        var tempInt = arc4random_uniform(9)
+                        while friendList.contains(Int(tempInt)){
+                            tempInt = arc4random_uniform(9)
+                        }
+                        friendList.append(Int(tempInt))
+                    }
+                    
+                    if friendsCount >= 1{
+                        let friendImg3 = UIImageView()
+                        friendImg3.frame = CGRect(x: 340, y: 450, width: 120, height: 120)
+                        friendImg3.contentMode = .scaleAspectFill
+                        friendImg3.layer.cornerRadius = 60
+                        friendImg3.layer.masksToBounds = true
+                        friendImg3.image = UIImage(named: "pic\(friendList[0])")
+                        self.imageView.addSubview(friendImg3)
+                    }
+                    
+                    if friendsCount >= 3{
+                        let friendImg2 = UIImageView()
+                        friendImg2.frame = CGRect(x: 185, y: 450, width: 120, height: 120)
+                        friendImg2.contentMode = .scaleAspectFill
+                        friendImg2.layer.cornerRadius = 60
+                        friendImg2.layer.masksToBounds = true
+                        friendImg2.image = UIImage(named: "pic\(friendList[1])")
+                        self.imageView.addSubview(friendImg2)
+                        
+                        let friendImg4 = UIImageView()
+                        friendImg4.frame = CGRect(x: 500, y: 450, width: 120, height: 120)
+                        friendImg4.contentMode = .scaleAspectFill
+                        friendImg4.layer.cornerRadius = 60
+                        friendImg4.layer.masksToBounds = true
+                        friendImg4.image = UIImage(named: "pic\(friendList[2])")
+                        self.imageView.addSubview(friendImg4)
+                    }
+                    
+                    if friendsCount >= 5{
+                        let friendImg1 = UIImageView()
+                        friendImg1.frame = CGRect(x: 30, y: 450, width: 120, height: 120)
+                        friendImg1.contentMode = .scaleAspectFill
+                        friendImg1.layer.cornerRadius = 60
+                        friendImg1.layer.masksToBounds = true
+                        friendImg1.image = UIImage(named: "pic\(friendList[3])")
+                        self.imageView.addSubview(friendImg1)
+                        
+                        let friendImg5 = UIImageView()
+                        friendImg5.frame = CGRect(x: 660, y: 450, width: 120, height: 120)
+                        friendImg5.contentMode = .scaleAspectFill
+                        friendImg5.layer.cornerRadius = 60
+                        friendImg5.layer.masksToBounds = true
+                        friendImg5.image = UIImage(named: "pic\(friendList[4])")
+                        self.imageView.addSubview(friendImg5)
+                    }
+                    
+                    self.limitLabel.frame = CGRect(x: 0, y: 270, width: 400, height: 63)
+                    self.limitLabel.textAlignment = .center
+                    self.limitLabel.numberOfLines = 1
+                    self.limitLabel.font = UIFont(name: "Avenir", size: 70)
+                    self.limitLabel.text = "\(self.waitTime) min"
+                    self.limitLabel.backgroundColor = .clear
+                    self.imageView.addSubview(self.limitLabel)
+                    
+                    self.refillLabel.frame = CGRect(x: 0, y: 360, width: 400, height: 42)
+                    self.refillLabel.textAlignment = .center
+                    self.refillLabel.numberOfLines = 1
+                    self.refillLabel.font = UIFont(name: "Avenir-Medium", size: 42)
+                    self.refillLabel.text = "WAIT"
+                    self.refillLabel.backgroundColor = .clear
+                    self.refillLabel.textColor = UIColor.darkGray
+                    self.imageView.addSubview(self.refillLabel)
+                    
+                    // Goes from $ to $$$
+                    let priceTxt = UILabel()
+                    //            priceTxt.frame = CGRect(x: 400, y: 270, width: 400, height: 63)
+                    //            priceTxt.textAlignment = .center
+                    //            priceTxt.numberOfLines = 1
+                    //            priceTxt.font = UIFont(name: "Avenir", size: 70)
+                    //            priceTxt.backgroundColor = .clear
+                    //            imageView.addSubview(priceTxt)
+                    
+                    let priceSub = UILabel()
+                    priceSub.frame = CGRect(x: 400, y: 360, width: 400, height: 42)
+                    priceSub.textAlignment = .center
+                    priceSub.numberOfLines = 1
+                    priceSub.font = UIFont(name: "Avenir-Medium", size: 42)
+                    priceSub.text = "PRICE"
+                    priceSub.backgroundColor = .clear
+                    priceSub.textColor = UIColor.darkGray
+                    self.imageView.addSubview(priceSub)
+                    
+                    let texture = UIImage.imageWithView(view: self.imageView)
+                    
+                    let infoNode = SCNNode()
+                    let infoGeometry = SCNPlane(width: 0.13, height: 0.09)
+                    
                     //Setting Values for Business Card
                     self.cat = (result!.category)
                     self.rating = (result!.rating)
                     self.name = (result!.name)
                     self.price = (result!.price)
-                }
                 
+                
+                // Price
+                priceTxt.frame = CGRect(x: 400, y: 270, width: 400, height: 63)
+                priceTxt.textAlignment = .center
+                priceTxt.numberOfLines = 1
+                priceTxt.font = UIFont(name: "Avenir", size: 70)
+                priceTxt.backgroundColor = .clear
+                priceTxt.text = self.price
+                
+                // Title
+                self.titleLabel.frame = CGRect(x: 30, y: 30, width: self.imageView.frame.width-128, height: 84)
+                self.titleLabel.textAlignment = .left
+                self.titleLabel.numberOfLines = 1
+                self.titleLabel.font = UIFont(name: "Avenir", size: 84)
+                self.titleLabel.backgroundColor = .clear
+                self.titleLabel.text = self.name.capitalized
+                
+                self.imageView.addSubview(starsImg)
+                self.imageView.addSubview(self.titleLabel)
+                self.imageView.addSubview(priceTxt)
+                
+//                //imageView.reloadInputViews()
+//                self.titleLabel.setNeedsDisplay()
+//                self.titleLabel.draw(CGRect(x: 30, y: 30, width: self.imageView.frame.width-128, height: 84))
+//                priceTxt.setNeedsDisplay()
+//                priceTxt.draw(CGRect(x: 400, y: 270, width: 400, height: 63))
+                
+                
+                
+                
+                starsImg.image = UIImage(named: "\(Int(self.rating))stars")
+                
+                infoGeometry.firstMaterial?.diffuse.contents = texture
+                infoNode.geometry = infoGeometry
+                infoNode.position.y += 0.09
+                infoNode.position.z += 0.0055
+                
+                textNode.addChildNode(backNode)
+                textNode.addChildNode(infoNode)
+                
+                textNode.constraints = [billboardConstraint]
+                textNode.runAction(SCNAction.scale(to: 0.0, duration: 0))
+                backNode.runAction(SCNAction.scale(to: 0.0, duration: 0))
+                infoNode.runAction(SCNAction.scale(to: 0.0, duration: 0))
+                textNode.runAction(SCNAction.fadeOpacity(to: 0.0, duration: 0))
+                backNode.runAction(SCNAction.fadeOpacity(to: 0.0, duration: 0))
+                infoNode.runAction(SCNAction.fadeOpacity(to: 0.0, duration: 0))
+                
+                textNode.runAction(SCNAction.wait(duration: 0.01))
+                backNode.runAction(SCNAction.wait(duration: 0.01))
+                infoNode.runAction(SCNAction.wait(duration: 0.01))
+                textNode.runAction(SCNAction.scale(to: 1.0, duration: 0.3) )
+                backNode.runAction(SCNAction.scale(to: 1.0, duration: 0.3) )
+                infoNode.runAction(SCNAction.scale(to: 1.0, duration: 0.3) )
+                textNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
+                backNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
+                infoNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
+                
+                //Save nodes in array
+                self.nodeArray.append(infoNode)
+                self.nodeArray.append(textNode)
+                self.nodeArray.append(backNode)
+                
+                self.shopCards.append(infoNode)
                 //self.image = (result?.image)!
                 //(category: String, rating: Double, name: String, price: String, image: URL)
-                
+                }
                 self.stopLoader()
             })
             print("price: ", price)
             print("title: ", name)
-            // Price
-            priceTxt.frame = CGRect(x: 400, y: 270, width: 400, height: 63)
-            priceTxt.textAlignment = .center
-            priceTxt.numberOfLines = 1
-            priceTxt.font = UIFont(name: "Avenir", size: 70)
-            priceTxt.backgroundColor = .clear
-            priceTxt.text = price
-            
-            // Title
-            titleLabel.frame = CGRect(x: 30, y: 30, width: imageView.frame.width-128, height: 84)
-            titleLabel.textAlignment = .left
-            titleLabel.numberOfLines = 1
-            titleLabel.font = UIFont(name: "Avenir", size: 84)
-            titleLabel.backgroundColor = .clear
-            titleLabel.text = name.capitalized
-            
-            imageView.addSubview(starsImg)
-            imageView.addSubview(self.titleLabel)
-            imageView.addSubview(priceTxt)
-            
-            //imageView.reloadInputViews()
-            titleLabel.setNeedsDisplay()
-            titleLabel.draw(CGRect(x: 30, y: 30, width: imageView.frame.width-128, height: 84))
-            priceTxt.setNeedsDisplay()
-            priceTxt.draw(CGRect(x: 400, y: 270, width: 400, height: 63))
-            
-            
-            
-            
-            starsImg.image = UIImage(named: "\(Int(self.rating))stars")
-            
-            infoGeometry.firstMaterial?.diffuse.contents = texture
-            infoNode.geometry = infoGeometry
-            infoNode.position.y += 0.09
-            infoNode.position.z += 0.0055
-            
-            textNode.addChildNode(backNode)
-            textNode.addChildNode(infoNode)
-            
-            textNode.constraints = [billboardConstraint]
-            textNode.runAction(SCNAction.scale(to: 0.0, duration: 0))
-            backNode.runAction(SCNAction.scale(to: 0.0, duration: 0))
-            infoNode.runAction(SCNAction.scale(to: 0.0, duration: 0))
-            textNode.runAction(SCNAction.fadeOpacity(to: 0.0, duration: 0))
-            backNode.runAction(SCNAction.fadeOpacity(to: 0.0, duration: 0))
-            infoNode.runAction(SCNAction.fadeOpacity(to: 0.0, duration: 0))
-            
-            textNode.runAction(SCNAction.wait(duration: 0.01))
-            backNode.runAction(SCNAction.wait(duration: 0.01))
-            infoNode.runAction(SCNAction.wait(duration: 0.01))
-            textNode.runAction(SCNAction.scale(to: 1.0, duration: 0.3) )
-            backNode.runAction(SCNAction.scale(to: 1.0, duration: 0.3) )
-            infoNode.runAction(SCNAction.scale(to: 1.0, duration: 0.3) )
-            textNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
-            backNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
-            infoNode.runAction(SCNAction.fadeOpacity(to: 1.0, duration: 0.3))
-            
-            //Save nodes in array
-            self.nodeArray.append(infoNode)
-            self.nodeArray.append(textNode)
-            self.nodeArray.append(backNode)
-            
-            self.shopCards.append(infoNode)
             
         } else if firstTap == true {
             
