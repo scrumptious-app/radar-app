@@ -167,7 +167,9 @@ class GoogleAPIManager {
                             }
                         }
                         print("GOOGLE API RESPONSE: ",response)
+                        if response != nil{
                         apiManager.getBusinessInfo("\(response)",lat: lat, lon: lon, completionHandler: handler)
+                        }
                     }
                     
                 })

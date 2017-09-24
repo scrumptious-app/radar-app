@@ -159,8 +159,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6e-gP-yuw">
                                 <rect key="frame" x="0.0" y="50" width="375" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Near You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EF-pg-OgH">
-                                        <rect key="frame" x="20" y="28" width="129" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular Around You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EF-pg-OgH">
+                                        <rect key="frame" x="20" y="28" width="207" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="fcO-nE-7ei"/>
                                         </constraints>
